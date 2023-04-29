@@ -11,6 +11,12 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: "3.10"
+      - name: Install Xvfb and Pygame dependencies
+        run: sudo apt-get install -y xvfb libglu1-mesa-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsmpeg-dev libsdl1.2-dev libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev libfreetype6-dev
+      - name: Set up Xvfb
+        run: |
+          sudo Xvfb :99 -screen 0 1024x768x16 &
+          export DISPLAY=:99
       - name: Install tox
         run: pip install tox
       - name: Run tox
@@ -19,6 +25,6 @@ jobs:
         uses: codecov/codecov-action@v2.1.0
         with:
           flags: unittests
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          env:
+            CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
