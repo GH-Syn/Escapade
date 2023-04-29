@@ -1,0 +1,23 @@
+name: codecov
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - uses: codecov/codecov-action@v3.1.3
+      name: Codecov
+      
+      with:
+        token: add4c20f-d619-41cb-9044-b275f22ea7eb
