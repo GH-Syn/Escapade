@@ -1,7 +1,3 @@
 pygame
 pygame_gui
-pytest
-pytest-html
-coverage
-pytest-cov
 
