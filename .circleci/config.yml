@@ -30,6 +30,6 @@ jobs:
     steps:
       - codecov/upload:
           file: ./.coverage 
-          token: $CODECOV_TOKEN
+          token: ${{ env.CODECOV_TOKEN }}
           validate_url: true
           when: always 
