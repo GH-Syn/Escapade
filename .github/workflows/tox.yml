@@ -15,11 +15,10 @@ jobs:
         run: pip install tox
       - name: Run tox
         run: tox
-
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2.1.0
         with:
           flags: unittests
-          env:
-            CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
