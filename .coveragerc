@@ -1,6 +1,10 @@
 [run]
 source = game/
-omit = */tests/*
+omit =
+    setup.py
+    */setup.py
+    */conftest.py
+    */tests/*
 branch = True
 disable_warnings = no-data-collected
 
