@@ -31,5 +31,5 @@ jobs:
       - codecov/upload:
           file: .coverage 
           token: {{ secrets.CODECOV_TOKEN }}
-          validate_url: false
+          validate_url: true
           when: always 
