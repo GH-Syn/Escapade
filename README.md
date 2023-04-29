@@ -1,4 +1,6 @@
+
 # Escapade
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/GH-Syn/Escapade/tree/main.svg?style=svg&circle-token=049342a35cf1eae2d006fcebcb4597f903810b06)](https://dl.circleci.com/status-badge/redirect/gh/GH-Syn/Escapade/tree/main)
 
 Escapade is a puzzle adventure game where the player must plot their escape from a series of increasingly challenging environments. Use your wits and problem-solving skills to find clues, unlock hidden passages, and outsmart your captors.
 
