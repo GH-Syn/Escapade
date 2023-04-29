@@ -12,6 +12,17 @@ orbs:
   python: circleci/python@2.1.1
   codecov: codecov/codecov@3.2.4
 
+
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+workflows:
+  tests: # This is the name of the workflow, feel free to change it to better match your workflow.
+    # Inside the workflow, you define the jobs you want to run.
+    jobs:
+      - build-and-test
+      - checkout
+      - codecov/upload
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
@@ -48,17 +59,3 @@ jobs:
           token: add4c20f-d619-41cb-9044-b275f22ea7eb 
           validate_url: true 
           when: always 
-
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
-workflows:
-  tests: # This is the name of the workflow, feel free to change it to better match your workflow.
-    # Inside the workflow, you define the jobs you want to run.
-    jobs:
-      - build-and-test
-
-  upload-to-codecov:
-    jobs:
-      - checkout
-      - codecov/upload
-
