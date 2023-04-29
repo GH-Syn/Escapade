@@ -4,16 +4,16 @@ from game.main import *
 import unittest
 
 
-
 class TestFoo(unittest.TestCase):
-
     def test_add(self):
-        x = 2
-        y = 3
+        test_data = [(2, 3), (1, 3)]
         
-        result = add(x, y)
+        for group in test_data:
+            result = add(*group)
+            self.assertEqual(result, group[0] + group[1], "Addition error")
 
-        self.assertEqual(result, x + y, "Addition error")
+            # Check for the mutated code
+            self.assertNotEqual(result, group[0] - group[1], "Subtraction error")
 
-        with self.assertRaises(AssertionError):
-            self.assertEqual(result, x - y, "Assertion error expected")
+            # Check for None
+            self.assertIsNotNone(result, "None returned")
