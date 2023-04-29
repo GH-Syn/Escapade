@@ -6,7 +6,7 @@ jobs:
   tox:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -15,4 +15,11 @@ jobs:
       run: pip install tox
     - name: Run tox
       run: tox
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v2.1.0
+      with:
+        flags: unittests
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
