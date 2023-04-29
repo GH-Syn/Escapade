@@ -1,3 +1,5 @@
+devops/
+
 # pytest
 *.egg-info/
 __pycache__/
