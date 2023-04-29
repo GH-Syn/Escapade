@@ -1,10 +1,10 @@
-import utils
 import unittest
 import os
 import sys
 
 sys.path.insert(0, os.getcwd())
 
+import utils
 
 class TestUtils(unittest.TestCase):
     def test_init(self):
