@@ -5,6 +5,7 @@ devops/
 __pycache__/
 .pytest_cache/
 
+html/
 # coverage
 .coverage
 htmlcov/
