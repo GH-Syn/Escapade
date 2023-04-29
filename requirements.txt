@@ -1,0 +1,7 @@
+pygame
+pygui
+pytest
+pytest-html
+coverage
+pytest-cov
+
