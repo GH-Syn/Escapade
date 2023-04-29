@@ -1,19 +1,24 @@
-import sys, os
-sys.path.insert(0, os.getcwd())
-from game.main import *
 import unittest
 
+import utils
 
-class TestFoo(unittest.TestCase):
-    def test_add(self):
-        test_data = [(2, 3), (1, 3)]
-        
-        for group in test_data:
-            result = add(*group)
-            self.assertEqual(result, group[0] + group[1], "Addition error")
 
-            # Check for the mutated code
-            self.assertNotEqual(result, group[0] - group[1], "Subtraction error")
+class TestUtils(unittest.TestCase):
+    def test_init(self):
+        kwargs = [
+            {"base": True, "display": False, "mixer": True, "font": False},
+            {"base": False, "display": False, "mixer": True, "font": False},
+            {"base": True, "display": True, "mixer": True, "font": False},
+            {"base": True, "display": True, "mixer": True, "font": True},
+        ]
 
-            # Check for None
-            self.assertIsNotNone(result, "None returned")
+        for kwarg in kwargs:
+            utils.init(
+                    init_base=kwarg["base"],
+                    init_display=kwarg["display"],
+                    init_mixer=kwarg["mixer"],
+                    init_font=kwarg["font"])
+
+
+if __name__ == "__main__":
+    unittest.main()

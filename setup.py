@@ -23,13 +23,13 @@ setuptools.setup(
         "Intended Audience :: Developers",
         "Topic :: Games/Entertainment :: Puzzle",
     ],
-    python_requires='>=3.9',
+    python_requires=">=3.9",
     install_requires=[
-        'pygame',
+        "pygame",
     ],
     entry_points={
-        'console_scripts': [
-            'Escapade=game.game:main',
+        "console_scripts": [
+            "Escapade=game.game:main",
         ],
     },
 )
