@@ -30,6 +30,6 @@ jobs:
     steps:
       - codecov/upload:
           file: .coverage 
-          token: "add4c20f-d619-41cb-9044-b275f22ea7eb "
+          token: {{ secrets.CODECOV_TOKEN }}
           validate_url: false
           when: always 
