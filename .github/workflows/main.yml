@@ -14,5 +14,12 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run tests and collect coverage
         run: pytest --cov app
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          CODECOV_REQUIRE_ALL_FILES: false
+          CODECOV_MIN_COVERAGE: 0
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
