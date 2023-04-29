@@ -8,3 +8,8 @@ pytest-html
 pytest-emoji
 pytest-sugar
 pytest-progress
+
+tox
+autopep8
+flake8
+black
