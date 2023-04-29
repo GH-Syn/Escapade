@@ -21,8 +21,7 @@ jobs:
     steps:
       - codecov/upload:
           file: ./.coverage 
-          token: ${{ env.CODECOV_TOKEN }}
-          validate_url: true
+          validate_url: false
           when: always 
 
 # Invoke jobs via workflows
