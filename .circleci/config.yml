@@ -29,7 +29,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - codecov/upload:
-          file: .coverage 
-          token: {{ secrets.CODECOV_TOKEN }}
+          file: ./.coverage 
+          token: $CODECOV_TOKEN
           validate_url: true
           when: always 
