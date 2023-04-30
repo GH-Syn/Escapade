@@ -1,0 +1,16 @@
+{
+	"world_space_health_bar":
+	{
+		"colours":
+		{
+			"normal_border": "#AAAAAA",
+			"filled_bar": "#f4251b",
+			"unfilled_bar": "#CCCCCC"
+		},
+		"misc":
+		{
+			"follow_sprite_offset": "-5, 32",
+			"border_width": "0"
+		}
+	}
+}

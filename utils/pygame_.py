@@ -14,6 +14,7 @@ def init(
     :param mixer: Controls audio output in the pygame library
     :param fonts: Displays and renders system fonts
     """
+
     if init_base:
         pygame.base.init()
     if init_display:
