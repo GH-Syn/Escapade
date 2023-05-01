@@ -3,8 +3,7 @@ import pygame_gui
 
 
 class Game:
-
-    DEFAULT_GAME_BACKGROUND_COLOR = '#8d8d9b'
+    DEFAULT_GAME_BACKGROUND_COLOR = "#8d8d9b"
     window = pygame.display.get_surface()
     current_map = ...
     GUI_manager = pygame_gui.UIManager(window.get_size())

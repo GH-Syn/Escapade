@@ -2,7 +2,7 @@ import pygame
 
 
 class ItemContainer(pygame.sprite.Sprite):
-    """ Item container holds the player items """
+    """Item container holds the player items"""
 
     def __init__(self, image=None):
         """
@@ -18,13 +18,17 @@ class ItemContainer(pygame.sprite.Sprite):
         screen_size = pygame.display.get_surface()
 
         # Load the image for the inventory item
-        self.image = pygame.image.load('res/ui/container.png').convert_alpha()
+        self.image = pygame.image.load("res/ui/container.png").convert_alpha()
         if image:
             self.image_size = image.get_size()
             image = pygame.image.load(image).convert_alpha()
-            self.image.blit(image, 
-                            (int(self.image_size.width() / 2 - self.image.get_width() / 2),
-                             int(self.image_size.height() / 2 - self.image.get_height() / 2)))
+            self.image.blit(
+                image,
+                (
+                    int(self.image_size.width() / 2 - self.image.get_width() / 2),
+                    int(self.image_size.height() / 2 - self.image.get_height() / 2),
+                ),
+            )
 
         # Set the position of the inventory item
         self.rect = self.image.get_rect()
@@ -36,7 +40,9 @@ class ItemContainer(pygame.sprite.Sprite):
         surface.blit(self.image, (x, y))
 
     @classmethod
-    def create_inventory(cls, num_items=5, item_width=16, item_height=16, padding=3) -> pygame.sprite.Group:
+    def create_inventory(
+        cls, num_items=5, item_width=16, item_height=16, padding=3
+    ) -> pygame.sprite.Group:
         """Creates inventory with specified number of items, width and height of the items, and padding between the items.
 
         :param `num_items`: The number of items to create in the inventory.
@@ -67,7 +73,7 @@ class ItemContainer(pygame.sprite.Sprite):
         for i in range(num_items):
             item = cls()
             item.rect.x = start_x + i * (item_width + padding)  # pyright: ignore
-            item.rect.y = (screen_height - item_height) // 2    # pyright: ignore
+            item.rect.y = (screen_height - item_height) // 2  # pyright: ignore
             inventory_group.add(item)
 
         return inventory_group

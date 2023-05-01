@@ -6,14 +6,12 @@ import pygame
 sys.path.insert(0, os.getcwd())
 
 import utils
-import ui
+from utils.pygame_ import emerge_from_color, fade_out, fade_into_color
 import screen_size
 
 pygame.display.init()
 
-window = pygame.display.set_mode((
-    screen_size.width,
-    screen_size.height))
+window = pygame.display.set_mode((screen_size.width, screen_size.height))
 
 utils.init(False)
 
@@ -35,10 +33,14 @@ splash = SplashScreen()
 while True:
     match game_state:
         case -1:
-            splash.update()
+            if not splash.update():
+                game_state = 0
+
             splash.draw()
+
         case 0:
             # menu
+            menu.open()
             menu.update()
             menu.draw()
         case 1:

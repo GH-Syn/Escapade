@@ -5,19 +5,20 @@ import pygame
 
 
 class SplashScreen:
-
-    datafile = open('data/theme.json', 'r')
-    transition = json.load(datafile)['SplashScreen']['default']
+    datafile = open("data/theme.json", "r")
+    transition = json.load(datafile)["SplashScreen"]["default"]
     datafile.close()
 
     window = pygame.display.get_surface()
+
+    surface = pygame.Surface(window.get_size(), pygame.SRCALPHA)
 
     # Define the colors and fonts for the splash screen
     background_color = transition["bg_color"]
     text_color = transition["text_color"]
 
     font_size = transition["font_size"]
-    font = os.path.join('res/fonts/Silkscreen', 'slkscr.ttf')
+    font = os.path.join("res/fonts/Silkscreen", "slkscr.ttf")
 
     label_text = "Escapade"
     label_font = pygame.font.Font(font, font_size)
@@ -28,7 +29,14 @@ class SplashScreen:
     center_y = window.get_height() // 2
 
     # Create the label rect and add it to the GUI manager
-    label_rect = pygame.Rect(center_x - (label_surf.get_width() // 2), center_y - (label_surf.get_height() // 2), label_surf.get_width(), label_surf.get_height())
+    label_rect = pygame.Rect(
+        center_x - (label_surf.get_width() // 2),
+        center_y - (label_surf.get_height() // 2),
+        label_surf.get_width(),
+        label_surf.get_height(),
+    )
+
+    done = False
 
     # Set the alpha of the label to 0 to start with
     label_surf.set_alpha(0)
@@ -40,7 +48,7 @@ class SplashScreen:
     timer = pygame.time.Clock()
     current_time = 0.0
     alpha = 0
-    
+
     @classmethod
     def update(cls):
         for event in pygame.event.get():
@@ -63,8 +71,11 @@ class SplashScreen:
             alpha = int(255 * (cls.current_time / cls.fade_time))
         elif cls.current_time > (cls.fade_time * 2):
             # Fade out and quit
-            alpha = int(255 - (255 * ((cls.current_time - (cls.fade_time * 2)) / cls.fade_time)))
+            alpha = int(
+                255 - (255 * ((cls.current_time - (cls.fade_time * 2)) / cls.fade_time))
+            )
             if alpha <= 0:
+                cls.done = True
                 return False
         else:
             # Hold for a moment
@@ -75,7 +86,10 @@ class SplashScreen:
 
     @classmethod
     def draw(cls):
-        # Draw the screen and GUI elements
-        cls.window.fill(cls.background_color)
-        cls.window.blit(cls.label_surf, cls.label_rect)
+        """ Draw to screen as declared in class var """
+
+        cls.surface.fill(cls.background_color)
+        cls.surface.blit(cls.label_surf, cls.label_rect)
+        cls.window.blit(cls.surface, (0, 0))
+
         pygame.display.update()
