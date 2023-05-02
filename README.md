@@ -19,10 +19,10 @@ To play Escapade, simply run the game executable file and follow the on-screen i
 
 ## Requirements
 
-Escapade requires a computer running Python 3 and the Pygame library. You can install Pygame using pip:
+Escapade requires a computer running Python 3 and the Pygame library. You can install the needed libraries using pip:
 
 ```bash
-pip install pygame
+python -m pip install --user -r requirements.txt 
 ```
 
 ## Contributing
