@@ -1,10 +1,10 @@
 import os
+from tqdm import tqdm
 import pygame
 from pygame.constants import SRCALPHA
 
-
 # TODO: remove un-used imports
-import re # pyright: ignore
+import re  # pyright: ignore
 from utils.pygame_ import fade_into_color  # pyright: ignore
 
 
@@ -19,21 +19,26 @@ class Menu:
     dt = 0
     fps = 24
 
-    images_: list[str] = [i for i in os.listdir("res/menu")]
     menu_sprites: list[pygame.SurfaceType] = []
-    
-    # prune image formats
-    for image in images_:
-        if not image.endswith(".png"):
-            images_.remove(image)
-            continue
-        print(image)
-        menu_sprites.append(pygame.image.load(os.path.join("res", "menu", image)).convert_alpha())
-    
+    images = []
+
+    with tqdm(
+        total=len(os.listdir("res/menu")), dynamic_ncols=True, desc="Loading menu files"
+    ) as pbar:
+        for j in os.listdir("res/menu"):
+            try:
+                if j.endswith(".png"):
+                    image = pygame.image.load(
+                        os.path.join("res", "menu", j)
+                    ).convert_alpha()
+                    menu_sprites.append(image)
+            finally:
+                pbar.update(1)
+
     opening = True
     opening_frame = 0
     opening_tick = 0
-    image = menu_sprites[0]
+    image: pygame.Surface = menu_sprites[0]
 
     mask = pygame.Surface(window.get_size(), SRCALPHA)
 
@@ -48,7 +53,6 @@ class Menu:
                 cls.image = cls.menu_sprites[cls.opening_frame]
                 cls.opening_tick = 0
                 cls.opening_frame += 1
-        # blit mask
         else:
             cls.opening = False
             return
