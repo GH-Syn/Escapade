@@ -5,15 +5,15 @@ import pygame
 
 sys.path.insert(0, os.getcwd())
 
-import utils
-from utils.pygame_ import emerge_from_color, fade_out, fade_into_color
 import screen_size
+
+# TODO: Remove unused imports
+from utils.pygame_ import emerge_from_color  # pyright: ignore
+from utils.pygame_ import fade_out, fade_into_color  # pyright: ignore
 
 pygame.display.init()
 
 window = pygame.display.set_mode((screen_size.width, screen_size.height))
-
-utils.init(False)
 
 import game as game_
 import menu as menu_
