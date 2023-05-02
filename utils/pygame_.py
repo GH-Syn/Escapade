@@ -25,9 +25,6 @@ def init(
         pygame.font.init()
 
 
-import pygame
-
-
 def fade_into_color(surface, duration, color):
     """
     Fades in the given surface over the specified duration using the specified color as a mask.

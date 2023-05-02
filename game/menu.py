@@ -46,7 +46,6 @@ class Menu:
             cls.opening = False
             return
 
-
     @classmethod
     def draw(cls):
         # cls.window.fill(cls.DEFAULT_MENU_BACKGROUND_COLOR)

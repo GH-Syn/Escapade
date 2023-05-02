@@ -86,7 +86,7 @@ class SplashScreen:
 
     @classmethod
     def draw(cls):
-        """ Draw to screen as declared in class var """
+        """Draw to screen as declared in class var"""
 
         cls.surface.fill(cls.background_color)
         cls.surface.blit(cls.label_surf, cls.label_rect)
