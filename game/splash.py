@@ -57,8 +57,13 @@ class SplashScreen:
                 sys.exit(0)
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
+                    cls.done = True
                     return False
                 elif event.key == pygame.K_ESCAPE:
+                    cls.done = True
+                    return False
+                elif event.key == pygame.K_SPACE:
+                    cls.done = True
                     return False
 
         # Update the GUI manager
