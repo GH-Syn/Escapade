@@ -1,9 +1,10 @@
 import os
-from tqdm import tqdm
+import re
+import sys
+
 import pygame
 from pygame.constants import SRCALPHA
-
-import re
+from tqdm import tqdm
 
 class Menu:
     window = pygame.display.get_surface()
@@ -62,6 +63,10 @@ class Menu:
     image: pygame.Surface = menu_sprites[0]
 
     mask = pygame.Surface(window.get_size(), SRCALPHA)
+    play_button_rect = pygame.Rect(700, 180, 105, 40)
+    quit_button_rect = pygame.Rect(700, 245, 105, 40)
+
+    mx, my = pygame.mouse.get_pos()
 
     @classmethod
     def open(cls):
@@ -87,5 +92,20 @@ class Menu:
 
     @classmethod
     def update(cls):
+        # if user presses buttons
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEMOTION:
+                cls.mx, cls.my = pygame.mouse.get_pos()
+                print((cls.mx, cls.my))
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                print((cls.mx, cls.my))
+                if pygame.Rect.collidepoint(cls.play_button_rect,
+                                            (cls.mx, cls.my)):
+                    pass
+                elif pygame.Rect.collidepoint(cls.quit_button_rect,
+                                              (cls.mx, cls.my)):
+                    pygame.quit()
+                    sys.exit(0)
+
         cls.dt = cls.clock.tick(cls.fps) / 1000.0
         pygame.display.update()
