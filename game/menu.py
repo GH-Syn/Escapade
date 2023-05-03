@@ -3,10 +3,7 @@ from tqdm import tqdm
 import pygame
 from pygame.constants import SRCALPHA
 
-# TODO: remove un-used imports
-import re  # pyright: ignore
-from utils.pygame_ import fade_into_color  # pyright: ignore
-
+import re
 
 class Menu:
     window = pygame.display.get_surface()
