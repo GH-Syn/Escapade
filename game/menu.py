@@ -1,13 +1,16 @@
-import re
 import os
+from tqdm import tqdm
 import pygame
 from pygame.constants import SRCALPHA
 
-from utils.pygame_ import fade_into_color
+# TODO: remove un-used imports
+import re  # pyright: ignore
+from utils.pygame_ import fade_into_color  # pyright: ignore
 
 
 class Menu:
     window = pygame.display.get_surface()
+    pygame.font.init()
     font = os.path.join("res/fonts/Silkscreen", "silkscr.ttf")
 
     DEFAULT_MENU_BACKGROUND_COLOR = (25, 25, 25)
@@ -16,32 +19,63 @@ class Menu:
     dt = 0
     fps = 24
 
-    images_ = [i for i in os.listdir("res/menu")]
-    images = sorted(images_, key=lambda x: int(x.split("_")[-1].split(".")[0]))
-    scroll = [
-        pygame.image.load(os.path.join("res", "menu", i)).convert_alpha()
-        for i in images
-    ]
+    menu_sprites: list[pygame.SurfaceType] = []
+    paths = []
+    images = []
+
+    with tqdm(
+        total=len(os.listdir("res/menu")), dynamic_ncols=True, desc="Looking for files"
+    ) as pbar:
+        for j in os.listdir("res/menu"):
+            try:
+                if j.endswith(".png"):
+                    image = pygame.image.load(
+                        os.path.join("res", "menu", j)
+                    ).convert_alpha()
+                    paths.append(os.path.join("res", "menu", j))
+            finally:
+                pbar.update(1)
+
+    paths: list[str] = paths
+    with tqdm(
+        total=len(paths),
+        dynamic_ncols=True,
+        desc="Cooking up some animations",
+    ) as pbar:
+        for path in paths:
+            if not path in ["old", "background", "menu.png", "sign", "sign_scaled.png"]:
+                images.append(pygame.image.load(path).convert_alpha())
+                pbar.update(1)
+
+    path = "res/menu"
+    pattern = re.compile(r"^open_menu_[1-6]\.png$")
+    menu_sprites.clear()
+    menu_sprites = []
+
+    for filename in os.listdir(path):
+        if pattern.match(filename):
+            menu_sprites.append(
+                pygame.image.load(os.path.join(path, filename)).convert_alpha()
+            )
 
     opening = True
     opening_frame = 0
     opening_tick = 0
-    image = scroll[0]
+    image: pygame.Surface = menu_sprites[0]
 
     mask = pygame.Surface(window.get_size(), SRCALPHA)
 
     @classmethod
     def open(cls):
-        """Open the scroll thing for the main menu"""
+        """Play main menu animation"""
         if not cls.opening:
             return
-        if cls.opening_frame < len(cls.scroll):
+        if cls.opening_frame < len(cls.menu_sprites):
             cls.opening_tick += 1
             if cls.opening_tick >= 3:
-                cls.image = cls.scroll[cls.opening_frame]
+                cls.image = cls.menu_sprites[cls.opening_frame]
                 cls.opening_tick = 0
                 cls.opening_frame += 1
-        # blit mask
         else:
             cls.opening = False
             return
