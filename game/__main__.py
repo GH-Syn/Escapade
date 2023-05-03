@@ -1,19 +1,22 @@
 import os
 import sys
 
+import screen_size
 import pygame
+
 
 sys.path.insert(0, os.getcwd())
 
-import screen_size
-
 pygame.display.init()
-
 window = pygame.display.set_mode((screen_size.width, screen_size.height))
 
+
+# imports must be like this due to pygame init requirements
 import game as game_
 import menu as menu_
 from splash import SplashScreen
+
+
 
 SPLASH_SCREEN = -1
 MENU = 0
