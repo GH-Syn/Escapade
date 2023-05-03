@@ -20,10 +20,11 @@ class Menu:
     fps = 24
 
     menu_sprites: list[pygame.SurfaceType] = []
+    paths = []
     images = []
 
     with tqdm(
-        total=len(os.listdir("res/menu")), dynamic_ncols=True, desc="Loading menu files"
+        total=len(os.listdir("res/menu")), dynamic_ncols=True, desc="Looking for files"
     ) as pbar:
         for j in os.listdir("res/menu"):
             try:
@@ -31,9 +32,31 @@ class Menu:
                     image = pygame.image.load(
                         os.path.join("res", "menu", j)
                     ).convert_alpha()
-                    menu_sprites.append(image)
+                    paths.append(os.path.join("res", "menu", j))
             finally:
                 pbar.update(1)
+
+    paths: list[str] = paths
+    with tqdm(
+        total=len(paths),
+        dynamic_ncols=True,
+        desc="Cooking up some animations",
+    ) as pbar:
+        for path in paths:
+            if not path in ["old", "background", "menu.png", "sign", "sign_scaled.png"]:
+                images.append(pygame.image.load(path).convert_alpha())
+                pbar.update(1)
+
+    path = "res/menu"
+    pattern = re.compile(r"^open_menu_[1-6]\.png$")
+    menu_sprites.clear()
+    menu_sprites = []
+
+    for filename in os.listdir(path):
+        if pattern.match(filename):
+            menu_sprites.append(
+                pygame.image.load(os.path.join(path, filename)).convert_alpha()
+            )
 
     opening = True
     opening_frame = 0
