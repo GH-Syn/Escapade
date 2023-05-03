@@ -49,7 +49,7 @@ class Menu:
     menu_sprites.clear()
     menu_sprites = []
 
-    for filename in os.listdir(path):
+    for filename in sorted(os.listdir(path)):
         if pattern.match(filename):
             menu_sprites.append(
                 pygame.image.load(os.path.join(path, filename)).convert_alpha()
@@ -58,6 +58,7 @@ class Menu:
     opening = True
     opening_frame = 0
     opening_tick = 0
+
     image: pygame.Surface = menu_sprites[0]
 
     mask = pygame.Surface(window.get_size(), SRCALPHA)
