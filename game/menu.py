@@ -96,9 +96,7 @@ class Menu:
         for event in pygame.event.get():
             if event.type == pygame.MOUSEMOTION:
                 cls.mx, cls.my = pygame.mouse.get_pos()
-                print((cls.mx, cls.my))
             if event.type == pygame.MOUSEBUTTONDOWN:
-                print((cls.mx, cls.my))
                 if pygame.Rect.collidepoint(cls.play_button_rect,
                                             (cls.mx, cls.my)):
                     pass
