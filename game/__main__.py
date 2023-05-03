@@ -36,8 +36,8 @@ while True:
             if not splash.update():
                 game_state = 0
 
+            # TO-DO: End animation if space key or return key is pressed
             splash.draw()
-
         case 0:
             # menu
             menu.open()

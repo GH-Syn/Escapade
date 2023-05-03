@@ -70,7 +70,7 @@ class Menu:
             return
         if cls.opening_frame < len(cls.menu_sprites):
             cls.opening_tick += 1
-            if cls.opening_tick >= 3:
+            if cls.opening_tick >= 6:
                 cls.image = cls.menu_sprites[cls.opening_frame]
                 cls.opening_tick = 0
                 cls.opening_frame += 1
