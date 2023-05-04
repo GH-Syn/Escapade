@@ -15,3 +15,9 @@ flake8
 black
 
 Xlib
+
+sphinx
+sphinxawesome-theme
+sphinx-material
+
+sphinx-tabs
