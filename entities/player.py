@@ -1,11 +1,10 @@
 import pygame
-from pygame.sprite import _Group
 
 
 class Player(pygame.sprite.Sprite):
     def __init__(self,
                  position: tuple[int | float, int | float],
-                 *groups: _Group) -> None:
+                 *groups) -> None:
         super().__init__(*groups)
 
         self.position = pygame.Vector2(*position)
@@ -45,12 +44,12 @@ class Player(pygame.sprite.Sprite):
         return self._animation
 
     @animation.setter
-    def animation(self, value):
+    def animation(self, value: str):
         self._animation = value
 
     @animation.getter
     def animation(self):
-        return self._animation
+        return self.current_animation
 
     @property
     def moving(self):
