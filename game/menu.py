@@ -85,8 +85,6 @@ class Menu:
 
     @classmethod
     def draw(cls):
-        # cls.window.fill(cls.DEFAULT_MENU_BACKGROUND_COLOR)
-
         cls.open()
         cls.window.blit(cls.image, (0, 0))
 
@@ -99,7 +97,7 @@ class Menu:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if pygame.Rect.collidepoint(cls.play_button_rect,
                                             (cls.mx, cls.my)):
-                    pass
+                    return False
                 elif pygame.Rect.collidepoint(cls.quit_button_rect,
                                               (cls.mx, cls.my)):
                     pygame.quit()
@@ -107,3 +105,4 @@ class Menu:
 
         cls.dt = cls.clock.tick(cls.fps) / 1000.0
         pygame.display.update()
+        return True
