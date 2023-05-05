@@ -6,6 +6,7 @@ import pygame
 from pygame.constants import SRCALPHA
 from tqdm import tqdm
 
+
 class Menu:
     window = pygame.display.get_surface()
     pygame.font.init()
@@ -95,11 +96,9 @@ class Menu:
             if event.type == pygame.MOUSEMOTION:
                 cls.mx, cls.my = pygame.mouse.get_pos()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if pygame.Rect.collidepoint(cls.play_button_rect,
-                                            (cls.mx, cls.my)):
+                if pygame.Rect.collidepoint(cls.play_button_rect, (cls.mx, cls.my)):
                     return False
-                elif pygame.Rect.collidepoint(cls.quit_button_rect,
-                                              (cls.mx, cls.my)):
+                elif pygame.Rect.collidepoint(cls.quit_button_rect, (cls.mx, cls.my)):
                     pygame.quit()
                     sys.exit(0)
 
