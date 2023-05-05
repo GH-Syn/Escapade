@@ -8,7 +8,7 @@ e_colorkey = (255, 255, 255)
 
 
 def set_global_colorkey(colorkey):
-    """ Set the standard colorkey to apply to everything that is a loaded pygame image
+    """Set the standard colorkey to apply to everything that is a loaded pygame image
     :param colorkey: colorkey as a tuple
     example: (255, 255, 255) would be white, removing white backgrounds
     (0, 0, 0) would be black and it would remove black backgrounds
@@ -28,7 +28,7 @@ def collision_test(object_1, object_list):
 
     collision_list = []
     for obj in object_list:
-        if obj.colliderect(object_1):
+        if obj.rect.colliderect(object_1.rect):
             collision_list.append(obj)
     return collision_list
 
@@ -49,21 +49,31 @@ class PhysicsObject(object):
         self.rect = pygame.Rect(x, y, self.width, self.height)
         self.x = x
         self.y = y
+        self.vel = pygame.math.Vector2(0, 0)
 
-    def move(self, movement, platforms, ramps=[]):
+    def move(self, movement):
         """Move physics object in a given direction provided by `movement`
 
         :param movement: The movement as a list with elements (integers) that dictate the movment direction.
         Example of what `movement` might look like: [1, -2] 1 is the x (positive) and -2 is the y (negative)
         So moving forwards 1 in the x direction is the same as moving right, and moving -2 in the y directoin is the same as moving up.
 
+        """
+
+        self.vel.x = movement[0]
+        self.vel.y = movement[1]
+
+        self.rect.x = int(self.vel.x)
+        self.rect.y = int(self.vel.y)
+    
+    def collide(self, platforms, ramps):
+        """Collide with objects platforms and ramps
+
         :param platforms: A list of platforms (as a list) to detect collision with.
         :param ramps: Any ramps (sprites with diagonal sides) that need to be mentioned (default=[])
         """
 
         ramps = ramps
-        self.x += movement[0]
-        self.rect.x = int(self.x)
         block_hit_list = collision_test(self.rect, platforms)
         collision_types = {
             "top": False,
@@ -77,28 +87,28 @@ class PhysicsObject(object):
         # added collision data to "collision_types". ignore the poorly chosen variable name
         for block in block_hit_list:
             markers = [False, False, False, False]
-            if movement[0] > 0:
+            if self.vel.x > 0:
                 self.rect.right = block.left
                 collision_types["right"] = True
                 markers[0] = True
-            elif movement[0] < 0:
+            elif self.vel.y < 0:
                 self.rect.left = block.right
                 collision_types["left"] = True
                 markers[1] = True
             collision_types["data"].append([block, markers])
             self.x = self.rect.x
 
-        self.y += movement[1]
+        self.y += self.vel.y
         self.rect.y = int(self.y)
         block_hit_list = collision_test(self.rect, platforms)
 
         for block in block_hit_list:
             markers = [False, False, False, False]
-            if movement[1] > 0:
+            if self.vel.y > 0:
                 self.rect.bottom = block.top
                 collision_types["bottom"] = True
                 markers[2] = True
-            elif movement[1] < 0:
+            elif self.vel.y < 0:
                 self.rect.top = block.bottom
                 collision_types["top"] = True
                 markers[3] = True
@@ -110,7 +120,7 @@ class PhysicsObject(object):
 
 
 def simple_entity(x, y, e_type):
-    """ A simple entity with very basic properties (inherits Entity as used)
+    """A simple entity with very basic properties (inherits Entity as used)
 
     :param x: X position of entity
     :param y: Y position of entity
@@ -122,7 +132,7 @@ def simple_entity(x, y, e_type):
 
 
 def flip(img, flip_up=True):
-    """ Flip image (vertically) from its current state to a flipped image state
+    """Flip image (vertically) from its current state to a flipped image state
 
     :param flip_up: flips the image up if true and down if false
     :return: pygame.surface.Surface
@@ -172,7 +182,7 @@ class Entity(object):
         self.type = e_type  # used to determine animation set among other things
         self.action_timer = 0
         self.action = ""
-        self.set_action("idle")  # overall action for the entity
+        # self.set_action("idle")  # overall action for the entity
         self.entity_data = {}
         self.alpha = None
 
@@ -190,18 +200,25 @@ class Entity(object):
         self.obj.rect.x = x
         self.obj.rect.y = y
 
-    def move(self, momentum, platforms, ramps=[]):
+    def move(self, momentum):
         """Move entity in a given direction provided by `movement`
 
         :param momentum: The momentum as a list with elements (integers) that dictate the direction.
         Example of what `momentum` might look like: [1, -2] 1 is the x (positive) and -2 is the y (negative)
         So moving forwards 1 in the x direction is the same as moving right, and moving -2 in the y directoin is the same as moving up.
+        """
 
+        self.obj.move(momentum)
+
+    def collide(self, platforms, ramps=[]):
+        """
         :param platforms: A list of platforms (as a list) to detect collision with.
         :param ramps: Any ramps (sprites with diagonal sides) that need to be mentioned (default=[])
         """
 
-        collisions = self.obj.move(momentum, platforms, ramps)
+        ramps = ramps
+
+        collisions = self.obj.collide(platforms, ramps)
         self.x = self.obj.x
         self.y = self.obj.y
         return collisions
@@ -240,15 +257,15 @@ class Entity(object):
         Set animation sequence to a different animation
 
         ## About
-        This is commonly used when the player or any other entity needs to change the 
+        This is commonly used when the player or any other entity needs to change the
         current active animation that they are doing for
 
         ### Example
         if the player is moving
         and needs to then transform their animation into the idle animation because their
         velocity has reached 0 then the set_animatoin function would be called.
-        This would set the animation frame to 0 (meaning that the animation would start from 
-        the very beginning) and also sets the self.animation to sequence so that all the 
+        This would set the animation frame to 0 (meaning that the animation would start from
+        the very beginning) and also sets the self.animation to sequence so that all the
         other functions know what the entity is currently doing as an animation.
 
         :param `sequence`: The sequence of images to set the animation to as a list of surfaces
@@ -258,14 +275,14 @@ class Entity(object):
         self.animation_frame = 0
 
     def set_action(self, action_id, force=False):
-        """ Set the current action of the entity.
+        """Set the current action of the entity.
 
         :param action_id: The id of the action as a real/integer
         :param force: Whether the action should be imposed on the entity (bool)
         """
 
         if (self.action == action_id) and (force == False):
-            pass
+            return
         else:
             self.action = action_id
             anim = animation_higher_database[self.type][action_id]
@@ -282,7 +299,9 @@ class Entity(object):
         """
 
         x1, y1 = self.x + int(self.size_x / 2), self.y + int(self.size_y / 2)
-        x2, y2 = entity_2.x + int(entity_2.size_x / 2), entity_2.y + int(entity_2.size_y / 2)
+        x2, y2 = entity_2.x + int(entity_2.size_x / 2), entity_2.y + int(
+            entity_2.size_y / 2
+        )
         angle = math.atan((y2 - y1) / (x2 - x1))
 
         if x2 < x1:
@@ -302,7 +321,7 @@ class Entity(object):
         return [x, y]
 
     def clear_animation(self):
-        """ Sets the animation property to None"""
+        """Sets the animation property to None"""
 
         self.animation = None
 
@@ -327,7 +346,7 @@ class Entity(object):
         self.offset = offset
 
     def set_frame(self, amount: int):
-        """ Sets the current frame of the animation
+        """Sets the current frame of the animation
 
         :param `amount`: frame of the animation to goto
         """
@@ -335,12 +354,12 @@ class Entity(object):
         self.animation_frame = amount
 
     def handle(self):
-        """ Increments the action timer and sets the frame to 1 """
+        """Increments the action timer and sets the frame to 1"""
         self.action_timer += 1
         self.change_frame(1)
 
     def change_frame(self, amount: int):
-        """ Changes the frame to a given amount
+        """Changes the frame to a given amount
 
         :param amount: The amount of frames to set
         :type amount: int
@@ -375,7 +394,7 @@ class Entity(object):
             )
 
     def get_drawn_img(self):
-        """ Returns the current active image of the entity (currently shown) """
+        """Returns the current active image of the entity (currently shown)"""
         image_to_render = None
         if self.animation == None:
             if self.image != None:
@@ -461,7 +480,7 @@ def animation_sequence(sequence, base_path, colorkey=(255, 255, 255), transparen
 
 
 def get_frame(ID):
-    """ Get the given frame in the animation database """
+    """Get the given frame in the animation database"""
     global animation_database
     return animation_database[ID]
 
@@ -506,7 +525,6 @@ def load_animations(path: str):
             animation_higher_database[entity_type] = {}
 
         animation_higher_database[entity_type][animation_id] = [anim.copy(), tags]
-
 
 
 def particle_file_sort(l):

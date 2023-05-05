@@ -10,3 +10,5 @@ pyenv:
 	else \
 		echo "Python development versions already installed."; \
 	fi
+test:
+	python -m pytest --cov=./ --cov-config=.coveragerc --cov-fail-under=0 --cov-report=xml
