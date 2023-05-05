@@ -12,11 +12,16 @@ class Player(pygame.sprite.Sprite):
         self.accel = pygame.Vector2(0, 0)
         self.velocity = pygame.Vector2(0, 0)
 
+        # TO-DO: load images from player file. do not scale; camera will do that.
         self.images = pygame.image.load
 
         self.frame = 0
         self.tick = 0
         self.max_tick = 8
+
+        # TO-DO: create a 'facing' direction
+        # TO-DO: create a facing_as_str property that returns "UP" "LEFT" "DOWN" OR "RIGHT"
+        # this should be dependant on the facing vector -x +x -y or +y (not respectively to previous directions)
 
         self.current_animation: str = "idle"
 
