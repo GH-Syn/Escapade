@@ -21,3 +21,11 @@ sphinxawesome-theme
 sphinx-material
 
 sphinx-tabs
+
+typing-extensions>=3.10
+distlib>=0.3.6
+filelock>=3.11
+tomli>=1.1.0
+pluggy>=1
+tomli>=2.0.1
+platformdirs

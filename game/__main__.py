@@ -18,7 +18,6 @@ from splash import SplashScreen
 from zoom import ZoomScreen
 
 
-
 SPLASH_SCREEN = -1
 MENU = 0
 ZOOM_INTO_GAME = 1
