@@ -65,7 +65,7 @@ class PhysicsObject(object):
 
         self.rect.x = int(self.vel.x)
         self.rect.y = int(self.vel.y)
-    
+
     def collide(self, platforms, ramps):
         """Collide with objects platforms and ramps
 

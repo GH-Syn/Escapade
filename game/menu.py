@@ -23,7 +23,9 @@ class Menu:
     images = []
 
     with tqdm(
-        total=len(os.listdir("res/menu")), dynamic_ncols=True, desc="Looking for files"
+        total=len(os.listdir("res/menu")),
+        dynamic_ncols=True,
+        desc=" 👀 Looking for files",
     ) as pbar:
         for j in os.listdir("res/menu"):
             try:
@@ -39,7 +41,7 @@ class Menu:
     with tqdm(
         total=len(paths),
         dynamic_ncols=True,
-        desc="Cooking up some animations",
+        desc=" 🍽️  Cooking up some animations",
     ) as pbar:
         for path in paths:
             if not path in ["old", "background", "menu.png", "sign", "sign_scaled.png"]:
@@ -70,7 +72,7 @@ class Menu:
     mx, my = pygame.mouse.get_pos()
 
     @classmethod
-    def open(cls):
+    def play_open_animation(cls):
         """Play main menu animation"""
         if not cls.opening:
             return
@@ -85,12 +87,12 @@ class Menu:
             return
 
     @classmethod
-    def draw(cls):
-        cls.open()
+    def draw_to_window(cls):
+        cls.play_open_animation()
         cls.window.blit(cls.image, (0, 0))
 
     @classmethod
-    def update(cls):
+    def update_event_loop(cls):
         # if user presses buttons
         for event in pygame.event.get():
             if event.type == pygame.MOUSEMOTION:

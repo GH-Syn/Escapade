@@ -44,10 +44,13 @@ def get_display_size():
         try:
             from Xlib.display import Display
 
+            print("Identified linux OS")
+
             d = Display()
             s = d.screen()
             width = s.width_in_pixels
             height = s.height_in_pixels
+            print((width, height))
         except:
             pass
 

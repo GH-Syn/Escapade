@@ -1,4 +1,3 @@
-
 import os
 import sys
 
@@ -12,7 +11,6 @@ import unittest
 
 class TestPhysicsObject(unittest.TestCase):
     def setUp(self) -> None:
-
         self.physics_object = PhysicsObject(10, 10, 10, 10)
 
         return super().setUp()
@@ -24,18 +22,17 @@ class TestPhysicsObject(unittest.TestCase):
         self.physics_object.rect.y = 10
 
         return super().tearDown()
+
     def test_movement_object(self):
         self.physics_object.move([53, -33])
 
         self.assertTrue(self.physics_object.vel.x, 53)
         self.assertTrue(self.physics_object.vel.y, -33)
-        
+
     def test_collision_rect_on_movement(self):
         self.physics_object.move([-10, -20])
-        self.assertTrue(self.physics_object.rect.x,
-                        int(self.physics_object.vel.x))
-        self.assertTrue(self.physics_object.rect.y,
-                        int(self.physics_object.vel.y))
+        self.assertTrue(self.physics_object.rect.x, int(self.physics_object.vel.x))
+        self.assertTrue(self.physics_object.rect.y, int(self.physics_object.vel.y))
 
     def test_collision_object(self):
         self.physics_object.collide

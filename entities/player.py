@@ -2,9 +2,7 @@ import pygame
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self,
-                 position: tuple[int | float, int | float],
-                 *groups) -> None:
+    def __init__(self, position: tuple[int | float, int | float], *groups) -> None:
         super().__init__(*groups)
 
         self.position = pygame.Vector2(*position)
@@ -30,7 +28,7 @@ class Player(pygame.sprite.Sprite):
 
     def move(self):
         pass
-    
+
     def draw(self):
         pass
 
@@ -45,7 +43,7 @@ class Player(pygame.sprite.Sprite):
 
     @property
     def animation(self):
-        """ Current player animation """
+        """Current player animation"""
         return self._animation
 
     @animation.setter
@@ -58,7 +56,7 @@ class Player(pygame.sprite.Sprite):
 
     @property
     def moving(self):
-        """ Returns true if velocity is greater than 0 """
+        """Returns true if velocity is greater than 0"""
         return self._moving
 
     @moving.setter
@@ -68,12 +66,12 @@ class Player(pygame.sprite.Sprite):
     @moving.getter
     def moving(self):
         return self.velocity.magnitude().__gt__(0)
-    
+
     @property
     def attacking(self):
-        """ Returns true if the player is in attacking animation/mode """
+        """Returns true if the player is in attacking animation/mode"""
         return self._attacking
-    
+
     @attacking.setter
     def attacking(self, value: bool):
         self._attacking = value

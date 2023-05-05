@@ -68,7 +68,6 @@ class TestSurfaces(unittest.TestCase):
                     ).magnitude()
                 )
             except Exception:
-                print(image)
                 continue
 
     def test_fonts_load(self):
