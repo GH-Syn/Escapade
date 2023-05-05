@@ -25,7 +25,8 @@ class TestSurfaces(unittest.TestCase):
 
         for image in os.listdir("./res/menu"):
             images.append(image.split(".")[1]) if "." in image else ...
-            self.assertIn("png", images)
+
+        self.assertIn("png", images)
 
         creds = [i for i in os.listdir("res/credits")]
 
@@ -36,7 +37,7 @@ class TestSurfaces(unittest.TestCase):
         images = []
         for image in os.listdir("./res/maps"):
             images.append(image.split(".")[1]) if "." in image else ...
-            self.assertIn("xml", images)
+        self.assertIn("xml", images)
 
     def test_font_types(self):
         fonts = [font for font in os.listdir("./res/fonts")]
