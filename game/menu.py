@@ -8,9 +8,10 @@ from tqdm import tqdm
 
 
 class Menu:
-    window = pygame.display.get_surface()
+    pygame.display.init()
+    window = pygame.display.get_surface() if pygame.display.get_surface() else None
     pygame.font.init()
-    font = os.path.join("res/fonts/Silkscreen", "silkscr.ttf")
+    font = os.path.join("./res/fonts/Silkscreen", "slkscr.ttf")
 
     DEFAULT_MENU_BACKGROUND_COLOR = (25, 25, 25)
 
@@ -21,55 +22,28 @@ class Menu:
     menu_sprites: list[pygame.SurfaceType] = []
     paths = []
     images = []
-
-    with tqdm(
-        total=len(os.listdir("res/menu")),
-        dynamic_ncols=True,
-        desc=" 👀 Looking for files",
-    ) as pbar:
-        for j in os.listdir("res/menu"):
-            try:
-                if j.endswith(".png"):
-                    image = pygame.image.load(
-                        os.path.join("res", "menu", j)
-                    ).convert_alpha()
-                    paths.append(os.path.join("res", "menu", j))
-            finally:
-                pbar.update(1)
-
     paths: list[str] = paths
-    with tqdm(
-        total=len(paths),
-        dynamic_ncols=True,
-        desc=" 🍽️  Cooking up some animations",
-    ) as pbar:
-        for path in paths:
-            if not path in ["old", "background", "menu.png", "sign", "sign_scaled.png"]:
-                images.append(pygame.image.load(path).convert_alpha())
-                pbar.update(1)
 
     path = "res/menu"
     pattern = re.compile(r"^open_menu_[1-6]\.png$")
     menu_sprites.clear()
     menu_sprites = []
 
-    for filename in sorted(os.listdir(path)):
-        if pattern.match(filename):
-            menu_sprites.append(
-                pygame.image.load(os.path.join(path, filename)).convert_alpha()
-            )
-
     opening = True
     opening_frame = 0
     opening_tick = 0
 
-    image: pygame.Surface = menu_sprites[0]
-
-    mask = pygame.Surface(window.get_size(), SRCALPHA)
+    if window is not None:
+        mask = pygame.Surface(window.get_size(), SRCALPHA)
     play_button_rect = pygame.Rect(700, 180, 105, 40)
     quit_button_rect = pygame.Rect(700, 245, 105, 40)
 
     mx, my = pygame.mouse.get_pos()
+
+    def __init__(self):
+        self.load_menu_sprites_from_path()
+        self.sort_menu_sprites_by_pattern()
+        Menu.image: pygame.Surface = Menu.menu_sprites[0]
 
     @classmethod
     def play_open_animation(cls):
@@ -82,18 +56,53 @@ class Menu:
                 cls.image = cls.menu_sprites[cls.opening_frame]
                 cls.opening_tick = 0
                 cls.opening_frame += 1
-        else:
-            cls.opening = False
             return
+
+        cls.opening = False
+
+    @classmethod
+    def load_menu_sprites_from_path(cls, path="res/menu"):
+        """Recursively iterate through path and return a list of menu sprites"""
+
+        with tqdm(
+            total=len(os.listdir(path)),
+            dynamic_ncols=True,
+            desc=" 👀 Looking for files",
+        ) as pbar:
+            for j in os.listdir("res/menu"):
+                try:
+                    if j.endswith(".png"):
+                        if j not in [
+                            "old",
+                            "background",
+                            "menu.png",
+                            "sign",
+                            "sign_scaled.png",
+                        ]:
+                            image = pygame.image.load(
+                                os.path.join("res", "menu", j)
+                            ).convert_alpha()
+                            cls.menu_sprites.append(image)
+                finally:
+                    pbar.update(1)
+
+    @classmethod
+    def sort_menu_sprites_by_pattern(cls):
+        for filename in sorted(os.listdir(cls.path)):
+            if cls.pattern.match(filename):
+                cls.menu_sprites.append(
+                    pygame.image.load(os.path.join(cls.path, filename)).convert_alpha()
+                )
 
     @classmethod
     def draw_to_window(cls):
+        """Draw menu to window"""
         cls.play_open_animation()
         cls.window.blit(cls.image, (0, 0))
 
     @classmethod
     def update_event_loop(cls):
-        # if user presses buttons
+        """Wait for user input from event loop"""
         for event in pygame.event.get():
             if event.type == pygame.MOUSEMOTION:
                 cls.mx, cls.my = pygame.mouse.get_pos()
