@@ -23,9 +23,10 @@ class TestSurfaces(unittest.TestCase):
     def test_images_present(self):
         images = []
 
-        for image in os.listdir("res/menu"):
+        for image in os.listdir("./res/menu"):
             images.append(image.split(".")[1]) if "." in image else ...
-            self.assertIn("png", images)
+
+        self.assertIn("png", images)
 
         creds = [i for i in os.listdir("res/credits")]
 
@@ -34,18 +35,18 @@ class TestSurfaces(unittest.TestCase):
 
     def test_map_types(self):
         images = []
-        for image in os.listdir("res/maps"):
+        for image in os.listdir("./res/maps"):
             images.append(image.split(".")[1]) if "." in image else ...
-            self.assertIn("xml", images)
+        self.assertIn("xml", images)
 
     def test_font_types(self):
-        fonts = [font for font in os.listdir("res/fonts")]
+        fonts = [font for font in os.listdir("./res/fonts")]
 
         for font in self.fonts:
             self.assertIn(font, fonts)
 
     def test_menu_image_sizes(self):
-        menu_images = [image for image in os.listdir("res/menu")]
+        menu_images = [image for image in os.listdir("./res/menu")]
 
         for image in menu_images:
             image_small = image
@@ -71,11 +72,14 @@ class TestSurfaces(unittest.TestCase):
                 continue
 
     def test_fonts_load(self):
-        fonts = [font for font in os.listdir("res/fonts")]
+        fonts = [font for font in os.listdir("./res/fonts")]
 
         for font in self.fonts:
             font_face = os.path.join(
-                "res", "fonts", font, os.listdir(os.path.join("res", "fonts", font))[0]
+                "./res",
+                "fonts",
+                font,
+                os.listdir(os.path.join("./res", "fonts", font))[0],
             )
 
             self.assertIn(font, fonts)
