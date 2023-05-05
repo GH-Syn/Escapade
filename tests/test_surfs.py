@@ -76,7 +76,10 @@ class TestSurfaces(unittest.TestCase):
 
         for font in self.fonts:
             font_face = os.path.join(
-                "./res", "fonts", font, os.listdir(os.path.join("./res", "fonts", font))[0]
+                "./res",
+                "fonts",
+                font,
+                os.listdir(os.path.join("./res", "fonts", font))[0],
             )
 
             self.assertIn(font, fonts)
