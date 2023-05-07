@@ -13,8 +13,8 @@ date: 07/05/2023
 """
 
 import pygame
-from game.entity import Entity
-from game.consts import entity_colorkey
+from .entity import Entity
+from .consts import entity_colorkey
 
 global e_colorkey
 e_colorkey = entity_colorkey

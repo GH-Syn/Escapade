@@ -1,5 +1,5 @@
 import pygame
-from game.consts import entity_colorkey
+from .consts import entity_colorkey
 
 global e_colorkey
 e_colorkey = entity_colorkey

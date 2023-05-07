@@ -1,6 +1,6 @@
 import pygame
 
-from game.engine import collision_test
+from .engine import collision_test
 
 
 class PhysicsObject(object):

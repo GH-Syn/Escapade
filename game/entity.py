@@ -1,8 +1,8 @@
 import math
 import pygame
 
-from game.engine import blit_center, flip
-from game.physics_object import PhysicsObject
+from .engine import blit_center, flip
+from .physics_object import PhysicsObject
 
 
 class Entity(object):

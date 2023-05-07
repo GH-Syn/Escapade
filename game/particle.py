@@ -1,8 +1,8 @@
 import os
-from game.color import swap_color
+from .color import swap_color
 import pygame
-from game.consts import entity_colorkey
-from game.engine import blit_center
+from .consts import entity_colorkey
+from .engine import blit_center
 
 global e_colorkey, particle_images
 

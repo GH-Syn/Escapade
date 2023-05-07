@@ -1,5 +1,5 @@
-from zoom import ZoomScreen
-from splash import SplashScreen
+from .zoom import ZoomScreen
+from .splash import SplashScreen
 import menu as menu_
 import game as game_
 import os
