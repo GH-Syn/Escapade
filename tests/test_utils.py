@@ -1,14 +1,4 @@
-<<<<<<< Updated upstream
-import utils
 import unittest
-=======
->>>>>>> Stashed changes
-import os
-import unittest
-
-import pytest
-
-from utils import get_display_size
 import utils
 
 

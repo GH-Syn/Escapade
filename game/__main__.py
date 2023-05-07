@@ -1,10 +1,7 @@
-<<<<<<< Updated upstream
-=======
 from zoom import ZoomScreen
 from splash import SplashScreen
 import menu as menu_
 import game as game_
->>>>>>> Stashed changes
 import os
 import sys
 

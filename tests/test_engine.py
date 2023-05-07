@@ -21,13 +21,8 @@ class TestEngine(unittest.TestCase):
         self.assertTrue(e_colorkey, colorkey)
 
     def test_collision(self):
-<<<<<<< Updated upstream
-        objects = [simple_entity(10, 10, 'rock'),
-                   simple_entity(50, 50, 'boulder')]
-=======
         objects = [simple_entity(10, 10, "rock"),
                    simple_entity(50, 50, "boulder")]
->>>>>>> Stashed changes
 
         player_entity = simple_entity(10, 10, 'player')
 

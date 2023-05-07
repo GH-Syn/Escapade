@@ -8,15 +8,12 @@ from tqdm import tqdm
 
 
 class Menu:
-<<<<<<< Updated upstream
-    window = pygame.display.get_surface()
-=======
     """Handles menu events and animations"""
 
-    pygame.display.init()
-    window = pygame.display.get_surface() if pygame.display.get_surface() else None
->>>>>>> Stashed changes
     pygame.font.init()
+    pygame.display.init()
+
+    window = pygame.display.get_surface() if pygame.display.get_surface() else None
     font = os.path.join("res/fonts/Silkscreen", "silkscr.ttf")
 
     DEFAULT_MENU_BACKGROUND_COLOR = (25, 25, 25)
@@ -92,10 +89,9 @@ class Menu:
             return
 
     @classmethod
-<<<<<<< Updated upstream
     def draw(cls):
         cls.open()
-=======
+
     def load_menu_sprites_from_path(cls, path="res/menu"):
         """
         Recursively iterate through path and return a list of menu sprites.
@@ -141,7 +137,6 @@ class Menu:
         Draw menu to window.
         """
         cls.play_open_animation()
->>>>>>> Stashed changes
         cls.window.blit(cls.image, (0, 0))
 
     @classmethod

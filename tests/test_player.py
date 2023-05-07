@@ -40,7 +40,6 @@ class TestPlayer(unittest.TestCase):
             pass
 
         self.assertTrue(self.player.attacking)
-<<<<<<< Updated upstream
 
     def test_moving_property(self):
         """ Test that the moving property works """
@@ -64,7 +63,3 @@ class TestPlayer(unittest.TestCase):
         self.player.current_animation = "heal"
 
         self.assertTrue(self.player.animation == "heal")
-
-
-=======
->>>>>>> Stashed changes
