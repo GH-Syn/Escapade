@@ -34,6 +34,7 @@ def collision_test(object_1, object_list: list):
             collision_list.append(obj)
     return collision_list
 
+
 def simple_entity(x: int, y: int, e_type: str):
     """A simple entity with very basic properties (inherits Entity as used)
 

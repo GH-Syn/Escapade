@@ -13,9 +13,11 @@ class Menu:
     pygame.font.init()
     pygame.display.init()
 
-    window = pygame.display.get_surface() if pygame.display.get_surface() else None # pyright: ignore
-    window: pygame.SurfaceType = window 
-    font = os.path.join("res/fonts/Silkscreen", "silkscr.ttf")
+    window = (
+        pygame.display.get_surface() if pygame.display.get_surface() else None
+    )  # pyright: ignore
+    window: pygame.SurfaceType = window
+    font = os.path.join("res/fonts/Silkscreen", "slkscr.ttf")
 
     DEFAULT_MENU_BACKGROUND_COLOR = (25, 25, 25)
 
@@ -27,50 +29,66 @@ class Menu:
     paths = []
     images = []
 
-    with tqdm(
-        total=len(os.listdir("res/menu")), dynamic_ncols=True, desc="Looking for files"
-    ) as pbar:
-        for j in os.listdir("res/menu"):
-            try:
-                if j.endswith(".png"):
-                    image = pygame.image.load(
-                        os.path.join("res", "menu", j)
-                    ).convert_alpha()
-                    paths.append(os.path.join("res", "menu", j))
-            finally:
-                pbar.update(1)
+    if isinstance(pygame.display.get_surface(), pygame.SurfaceType):
+        with tqdm(
+            total=len(os.listdir("res/menu")),
+            dynamic_ncols=True,
+            desc="Looking for files",
+        ) as pbar:
+            for j in os.listdir("res/menu"):
+                try:
+                    if j.endswith(".png"):
+                        image = pygame.image.load(
+                            os.path.join("res", "menu", j)
+                        ).convert_alpha()
+                        paths.append(os.path.join("res", "menu", j))
+                finally:
+                    pbar.update(1)
 
     paths: list[str] = paths
-    with tqdm(
-        total=len(paths),
-        dynamic_ncols=True,
-        desc="Cooking up some animations",
-    ) as pbar:
-        for path in paths:
-            if not path in ["old", "background", "menu.png", "sign", "sign_scaled.png"]:
-                images.append(pygame.image.load(path).convert_alpha())
-                pbar.update(1)
+    if isinstance(pygame.display.get_surface(), pygame.SurfaceType):
+        with tqdm(
+            total=len(paths),
+            dynamic_ncols=True,
+            desc="Cooking up some animations",
+        ) as pbar:
+            for path in paths:
+                if not path in [
+                    "old",
+                    "background",
+                    "menu.png",
+                    "sign",
+                    "sign_scaled.png",
+                ]:
+                    images.append(pygame.image.load(path).convert_alpha())
+                    pbar.update(1)
 
     path = "res/menu"
     pattern = re.compile(r"^open_menu_[1-6]\.png$")
     menu_sprites.clear()
     menu_sprites = []
 
-    for filename in sorted(os.listdir(path)):
-        if pattern.match(filename):
-            menu_sprites.append(
-                pygame.image.load(os.path.join(path, filename)).convert_alpha()
-            )
+    if isinstance(pygame.display.get_surface(), pygame.SurfaceType):
+        for filename in sorted(os.listdir(path)):
+            if pattern.match(filename):
+                menu_sprites.append(
+                    pygame.image.load(os.path.join(path, filename)).convert_alpha()
+                )
 
     opening = True
     opening_frame = 0
     opening_tick = 0
 
-    image: pygame.Surface = menu_sprites[0]
+    mask = pygame.Surface((0, 0))
+    image = pygame.Surface((0, 0))
+    play_button_rect = pygame.Rect(0, 0, 0, 0)
+    quit_button_rect = pygame.Rect(0, 0, 0, 0)
 
-    mask = pygame.Surface(window.get_size(), SRCALPHA)
-    play_button_rect = pygame.Rect(700, 180, 105, 40)
-    quit_button_rect = pygame.Rect(700, 245, 105, 40)
+    if isinstance(pygame.display.get_surface(), pygame.SurfaceType):
+        image: pygame.Surface = menu_sprites[0]
+        mask = pygame.Surface(window.get_size(), SRCALPHA)
+        play_button_rect = pygame.Rect(700, 180, 105, 40)
+        quit_button_rect = pygame.Rect(700, 245, 105, 40)
 
     mx, my = pygame.mouse.get_pos()
 
@@ -129,8 +147,7 @@ class Menu:
         for filename in sorted(os.listdir(cls.path)):
             if cls.pattern.match(filename):
                 cls.menu_sprites.append(
-                    pygame.image.load(os.path.join(
-                        cls.path, filename)).convert_alpha()
+                    pygame.image.load(os.path.join(cls.path, filename)).convert_alpha()
                 )
 
     @classmethod

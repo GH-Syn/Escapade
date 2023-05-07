@@ -9,6 +9,7 @@ global e_colorkey, particle_images
 e_colorkey = entity_colorkey
 particle_images = {}
 
+
 class Particle(object):
     """Basic particle class that has simple movement, colors and what not."""
 

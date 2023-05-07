@@ -1,4 +1,8 @@
 import os
+import sys
+
+sys.path.insert(0, os.getcwd())
+
 import unittest
 import pytest
 import pygame

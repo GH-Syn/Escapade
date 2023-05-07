@@ -1,6 +1,7 @@
 {
     "include": [
 	    "game/**/*",
+	    "game/*",
 	    "entities/*",
 	    "utils/*",
 	    "ui/*"],

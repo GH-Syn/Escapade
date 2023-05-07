@@ -25,10 +25,8 @@ class ItemContainer(pygame.sprite.Sprite):
             self.image.blit(
                 image,
                 (
-                    int(self.image_size.width() / 2 -
-                        self.image.get_width() / 2),
-                    int(self.image_size.height() / 2 -
-                        self.image.get_height() / 2),
+                    int(self.image_size.width() / 2 - self.image.get_width() / 2),
+                    int(self.image_size.height() / 2 - self.image.get_height() / 2),
                 ),
             )
 
@@ -74,8 +72,7 @@ class ItemContainer(pygame.sprite.Sprite):
         # Create the inventory items and add them to the group
         for i in range(num_items):
             item = cls()
-            item.rect.x = start_x + i * \
-                (item_width + padding)  # pyright: ignore
+            item.rect.x = start_x + i * (item_width + padding)  # pyright: ignore
             item.rect.y = (screen_height - item_height) // 2  # pyright: ignore
             inventory_group.add(item)
 

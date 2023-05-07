@@ -1,8 +1,9 @@
 import math
 import pygame
 
-from .engine import blit_center, flip
-from .physics_object import PhysicsObject
+
+import game.engine
+import game.physics_object
 
 
 class Entity(object):
@@ -25,7 +26,7 @@ class Entity(object):
         self.y = y
         self.size_x = size_x
         self.size_y = size_y
-        self.obj = PhysicsObject(x, y, size_x, size_y)
+        self.obj = game.physics_object.PhysicsObject(x, y, size_x, size_y)
         self.animation: None | int = None
         self.image = None
         self.animation_frame = 0
@@ -38,7 +39,6 @@ class Entity(object):
         # self.set_action("idle")  # overall action for the entity
         self.entity_data = {}
         self.alpha = None
-
 
     def set_pos(self, x, y):
         """Set the position of the entity
@@ -224,7 +224,7 @@ class Entity(object):
         if self.animation != None:
             while self.animation_frame < 0:
                 if "loop" in self.animation_tags:
-                    self.animation_frame += len(self.animation) # pyright: ignore
+                    self.animation_frame += len(self.animation)  # pyright: ignore
                 else:
                     self.animation = 0
             # pyright: ignore
@@ -238,11 +238,11 @@ class Entity(object):
     def get_current_img(self):
         if self.animation == None:
             if self.image != None:
-                return flip(self.image, self.flip)
+                return game.engine.flip(self.image, self.flip)
             else:
                 return None
         else:
-            return flip(
+            return game.engine.flip(
                 Entity.animation_database[
                     self.animation[self.animation_frame]  # pyright: ignore
                 ],  # pyright: ignore
@@ -254,9 +254,9 @@ class Entity(object):
         image_to_render = None
         if self.animation == None:
             if self.image != None:
-                image_to_render = flip(self.image, self.flip).copy()
+                image_to_render = game.engine.flip(self.image, self.flip).copy()
         else:
-            image_to_render = flip(
+            image_to_render = game.engine.flip(
                 Entity.animation_database[
                     self.animation[self.animation_frame]  # pyright: ignore
                 ],  # pyright: ignore
@@ -274,9 +274,9 @@ class Entity(object):
         image_to_render = None
         if self.animation == None:
             if self.image != None:
-                image_to_render = flip(self.image, self.flip).copy()
+                image_to_render = game.engine.flip(self.image, self.flip).copy()
         else:
-            image_to_render = flip(
+            image_to_render = game.engine.flip(
                 Entity.animation_database[
                     self.animation[self.animation_frame]  # pyright: ignore
                 ],  # pyright: ignore
@@ -288,7 +288,7 @@ class Entity(object):
             image_to_render = pygame.transform.rotate(image_to_render, self.rotation)
             if self.alpha != None:
                 image_to_render.set_alpha(self.alpha)
-            blit_center(
+            game.engine.blit_center(
                 surface,
                 image_to_render,
                 (

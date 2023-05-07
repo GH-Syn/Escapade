@@ -1,3 +1,7 @@
+import os
+import sys
+
+sys.path.insert(0, os.getcwd())
 import unittest
 import utils
 
@@ -18,7 +22,6 @@ class TestUtils(unittest.TestCase):
                 init_mixer=kwarg["mixer"],
                 init_font=kwarg["font"],
             )
-
 
 
 if __name__ == "__main__":
