@@ -1,6 +1,6 @@
 coverage
 mutmut
-
+tqdm
 
 pytest
 pytest-cov
