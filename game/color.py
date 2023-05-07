@@ -16,7 +16,7 @@ def set_global_colorkey(colorkey):
     e_colorkey = colorkey
 
 
-def swap_color(img: pygame.SurfaceType, old_c: tuple[int], new_c: tuple[int]):
+def swap_color(img: pygame.SurfaceType, old_c: tuple[int, int, int], new_c: tuple[int]):
     """Swap the color on two images
 
     :param img: Image surface to swap the color of

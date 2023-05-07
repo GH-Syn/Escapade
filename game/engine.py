@@ -76,6 +76,9 @@ animation_database = {}
 global animation_higher_database  # pyright: ignore
 animation_higher_database = {}
 
+Entity.animation_database = animation_database
+Entity.animation_higher_database = animation_higher_database
+
 
 def animation_sequence(
     sequence: list[list[int]],

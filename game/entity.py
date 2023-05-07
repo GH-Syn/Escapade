@@ -1,13 +1,15 @@
+import math
 import pygame
 
-from game.engine import blit_center
+from game.engine import blit_center, flip
 from game.physics_object import PhysicsObject
 
 
 class Entity(object):
     """Entity object with rotation, speed, animation and various other actions"""
 
-    global animation_database, animation_higher_database
+    animation_database = {}
+    animation_higher_database = {}
 
     def __init__(self, x: int, y: int, size_x: int, size_y: int, e_type: str):
         """Entity constructor for setting size, entity type and position
@@ -36,6 +38,7 @@ class Entity(object):
         # self.set_action("idle")  # overall action for the entity
         self.entity_data = {}
         self.alpha = None
+
 
     def set_pos(self, x, y):
         """Set the position of the entity
@@ -136,7 +139,7 @@ class Entity(object):
             return
         else:
             self.action = action_id
-            anim = animation_higher_database[self.type][action_id]
+            anim = Entity.animation_higher_database[self.type][action_id]
             self.animation = anim[0]
             self.tags(anim[1])
             self.animation_frame = 0
@@ -221,15 +224,14 @@ class Entity(object):
         if self.animation != None:
             while self.animation_frame < 0:
                 if "loop" in self.animation_tags:
-                    # pyright: ignore
-                    self.animation_frame += len(self.animation)
+                    self.animation_frame += len(self.animation) # pyright: ignore
                 else:
                     self.animation = 0
             # pyright: ignore
-            while self.animation_frame >= len(self.animation):
+            while self.animation_frame >= len(self.animation):  # pyright: ignore
                 if "loop" in self.animation_tags:
                     # pyright: ignore
-                    self.animation_frame -= len(self.animation)
+                    self.animation_frame -= len(self.animation)  # pyright: ignore
                 else:
                     self.animation_frame = len(self.animation) - 1  # pyright: ignore
 
@@ -241,7 +243,7 @@ class Entity(object):
                 return None
         else:
             return flip(
-                animation_database[
+                Entity.animation_database[
                     self.animation[self.animation_frame]  # pyright: ignore
                 ],  # pyright: ignore
                 self.flip,  # pyright: ignore
@@ -255,7 +257,7 @@ class Entity(object):
                 image_to_render = flip(self.image, self.flip).copy()
         else:
             image_to_render = flip(
-                animation_database[
+                Entity.animation_database[
                     self.animation[self.animation_frame]  # pyright: ignore
                 ],  # pyright: ignore
                 self.flip,  # pyright: ignore
@@ -275,7 +277,7 @@ class Entity(object):
                 image_to_render = flip(self.image, self.flip).copy()
         else:
             image_to_render = flip(
-                animation_database[
+                Entity.animation_database[
                     self.animation[self.animation_frame]  # pyright: ignore
                 ],  # pyright: ignore
                 self.flip,  # pyright: ignore

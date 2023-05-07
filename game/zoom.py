@@ -3,7 +3,7 @@ This module houses the ZoomScreen class which zooms into the main menu
 
 module: game.zoom
    ⚪ draw
-     ↪️ Draw  screen surface to primary display surface
+     ↪️ Draw screen surface to primary display surface
    ⚪ update
      ↪️ Updates user events such as quit and button presses
 

@@ -1,5 +1,7 @@
 import pygame
 
+from game.engine import collision_test
+
 
 class PhysicsObject(object):
     """2D physics object used for basic movement and collision"""

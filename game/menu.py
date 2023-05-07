@@ -13,7 +13,8 @@ class Menu:
     pygame.font.init()
     pygame.display.init()
 
-    window = pygame.display.get_surface() if pygame.display.get_surface() else None
+    window = pygame.display.get_surface() if pygame.display.get_surface() else None # pyright: ignore
+    window: pygame.SurfaceType = window 
     font = os.path.join("res/fonts/Silkscreen", "silkscr.ttf")
 
     DEFAULT_MENU_BACKGROUND_COLOR = (25, 25, 25)
@@ -74,7 +75,7 @@ class Menu:
     mx, my = pygame.mouse.get_pos()
 
     @classmethod
-    def open(cls):
+    def play_open_animation(cls):
         """Play main menu animation"""
         if not cls.opening:
             return
@@ -90,8 +91,9 @@ class Menu:
 
     @classmethod
     def draw(cls):
-        cls.open()
+        cls.play_open_animation()
 
+    @classmethod
     def load_menu_sprites_from_path(cls, path="res/menu"):
         """
         Recursively iterate through path and return a list of menu sprites.

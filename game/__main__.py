@@ -37,7 +37,7 @@ while True:
                 game_state = 0
             splash.draw()
         case 0:
-            menu.open()
+            menu.play_open_animation()
             if not menu.update():
                 game_state = 1
             menu.draw()
