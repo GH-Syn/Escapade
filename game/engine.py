@@ -18,7 +18,8 @@ def set_global_colorkey(colorkey):
     e_colorkey = colorkey
 
 
-def collision_test(object_1, object_list):
+
+def collision_test(object_1, object_list: list):
     """Tests if an object is colliding with any entity in `object_list`
 
     :param object_1: Object as a sprite
@@ -33,6 +34,7 @@ def collision_test(object_1, object_list):
     return collision_list
 
 
+<<<<<<< Updated upstream
 class PhysicsObject(object):
     """2D physics object used for basic movement and collision"""
 
@@ -120,6 +122,9 @@ class PhysicsObject(object):
 
 
 def simple_entity(x, y, e_type):
+=======
+def simple_entity(x: int, y: int, e_type: str):
+>>>>>>> Stashed changes
     """A simple entity with very basic properties (inherits Entity as used)
 
     :param x: X position of entity
@@ -131,7 +136,7 @@ def simple_entity(x, y, e_type):
     return Entity(x, y, 1, 1, e_type)
 
 
-def flip(img, flip_up=True):
+def flip(img: pygame.SurfaceType, flip_up=True):
     """Flip image (vertically) from its current state to a flipped image state
 
     :param flip_up: flips the image up if true and down if false
@@ -141,7 +146,7 @@ def flip(img, flip_up=True):
     return pygame.transform.flip(img, flip_up, False)
 
 
-def blit_center(surf, surf2, pos):
+def blit_center(surf: pygame.SurfaceType, surf2: pygame.SurfaceType, pos):
     """Blit an image to the center of a given surface listed as `pos`
     :param surf: The surface in question to blit to or the (parent) surface
     :param surf2: The surface in which you would like to change the position to
@@ -451,7 +456,12 @@ global animation_higher_database  # pyright: ignore
 animation_higher_database = {}
 
 
-def animation_sequence(sequence, base_path, colorkey=(255, 255, 255), transparency=255):
+def animation_sequence(
+    sequence: list[list[int]],
+    base_path: str,
+    colorkey=(255, 255, 255),
+    transparency=255,
+):
     """Load an animation sequence from a given path.
 
     :param sequence: A list containing elements that follow the convention of [int_a, int_b]
@@ -477,6 +487,14 @@ def animation_sequence(sequence, base_path, colorkey=(255, 255, 255), transparen
         [result.append(image_id) for _ in range(frame[1])]
 
     return result
+
+
+def get_animation_database():
+    return animation_database
+
+
+def get_animation_higher_database():
+    return animation_higher_database
 
 
 def get_frame(ID):
@@ -524,6 +542,7 @@ def load_animations(path: str):
         if entity_type not in animation_higher_database:
             animation_higher_database[entity_type] = {}
 
+<<<<<<< Updated upstream
         animation_higher_database[entity_type][animation_id] = [anim.copy(), tags]
 
 
@@ -669,3 +688,7 @@ def swap_color(img, old_c, new_c):
     surf.set_colorkey(e_colorkey)
 
     return surf
+=======
+        animation_higher_database[entity_type][animation_id] = [
+            anim.copy(), tags]
+>>>>>>> Stashed changes

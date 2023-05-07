@@ -8,7 +8,14 @@ from tqdm import tqdm
 
 
 class Menu:
+<<<<<<< Updated upstream
     window = pygame.display.get_surface()
+=======
+    """Handles menu events and animations"""
+
+    pygame.display.init()
+    window = pygame.display.get_surface() if pygame.display.get_surface() else None
+>>>>>>> Stashed changes
     pygame.font.init()
     font = os.path.join("res/fonts/Silkscreen", "silkscr.ttf")
 
@@ -85,8 +92,56 @@ class Menu:
             return
 
     @classmethod
+<<<<<<< Updated upstream
     def draw(cls):
         cls.open()
+=======
+    def load_menu_sprites_from_path(cls, path="res/menu"):
+        """
+        Recursively iterate through path and return a list of menu sprites.
+        """
+
+        with tqdm(
+            total=len(os.listdir(path)),
+            dynamic_ncols=True,
+            desc=" 👀 Looking for files",
+        ) as pbar:
+            for j in os.listdir("res/menu"):
+                try:
+                    if j.endswith(".png"):
+                        if j not in [
+                            "old",
+                            "background",
+                            "menu.png",
+                            "sign",
+                            "sign_scaled.png",
+                        ]:
+                            image = pygame.image.load(
+                                os.path.join("res", "menu", j)
+                            ).convert_alpha()
+                            cls.menu_sprites.append(image)
+                finally:
+                    pbar.update(1)
+
+    @classmethod
+    def sort_menu_sprites_by_pattern(cls):
+        """
+        Fetch menu sprites that match a given pattern.
+        """
+        for filename in sorted(os.listdir(cls.path)):
+            if cls.pattern.match(filename):
+                cls.menu_sprites.append(
+                    pygame.image.load(os.path.join(
+                        cls.path, filename)).convert_alpha()
+                )
+
+    @classmethod
+    def draw_to_window(cls):
+        """
+        Draw menu to window.
+        """
+        cls.play_open_animation()
+>>>>>>> Stashed changes
         cls.window.blit(cls.image, (0, 0))
 
     @classmethod

@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 
 import os
 import sys
@@ -7,7 +8,11 @@ sys.path.insert(0, os.getcwd())
 from game.engine import *
 
 
+=======
+>>>>>>> Stashed changes
 import unittest
+from game.engine import *
+from game.physics_object import PhysicsObject
 
 
 class TestPhysicsObject(unittest.TestCase):

@@ -1,12 +1,7 @@
-import os
-import sys
-
-sys.path.insert(0, os.getcwd())
-
-from game.engine import *
-
-
 import unittest
+from game.color import set_global_colorkey
+from game.engine import *
+from game.physics_object import PhysicsObject
 
 
 class TestEngine(unittest.TestCase):
@@ -26,8 +21,13 @@ class TestEngine(unittest.TestCase):
         self.assertTrue(e_colorkey, colorkey)
 
     def test_collision(self):
+<<<<<<< Updated upstream
         objects = [simple_entity(10, 10, 'rock'),
                    simple_entity(50, 50, 'boulder')]
+=======
+        objects = [simple_entity(10, 10, "rock"),
+                   simple_entity(50, 50, "boulder")]
+>>>>>>> Stashed changes
 
         player_entity = simple_entity(10, 10, 'player')
 

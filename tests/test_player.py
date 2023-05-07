@@ -1,12 +1,6 @@
-import os
-import sys
 import unittest
 
-from pygame import Vector2
-
-sys.path.insert(0, os.getcwd())
-
-from entities.player import Player
+import entities.player
 from game.screen_size import height, width
 
 
@@ -14,7 +8,7 @@ from game.screen_size import height, width
 class TestPlayer(unittest.TestCase):
     """ Tests player methods and properties """
     def setUp(self) -> None:
-        self.player = Player(position=(10, 10))
+        self.player = entities.player.Player(position=(10, 10))
         return super().setUp()
     
     def test_fail_on_invalid_position_spawn(self):
@@ -46,6 +40,7 @@ class TestPlayer(unittest.TestCase):
             pass
 
         self.assertTrue(self.player.attacking)
+<<<<<<< Updated upstream
 
     def test_moving_property(self):
         """ Test that the moving property works """
@@ -71,3 +66,5 @@ class TestPlayer(unittest.TestCase):
         self.assertTrue(self.player.animation == "heal")
 
 
+=======
+>>>>>>> Stashed changes

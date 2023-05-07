@@ -1,11 +1,15 @@
+<<<<<<< Updated upstream
 import utils
 import unittest
+=======
+>>>>>>> Stashed changes
 import os
-import sys
+import unittest
 
-sys.path.insert(0, os.getcwd())
+import pytest
 
 from utils import get_display_size
+import utils
 
 
 class TestUtils(unittest.TestCase):

@@ -1,12 +1,9 @@
 """ Test surfaces are valid loadable and present """
 
 import os
-import sys
 import unittest
 
 import pygame
-
-sys.path.insert(0, os.getcwd())
 
 
 class TestSurfaces(unittest.TestCase):
@@ -59,12 +56,16 @@ class TestSurfaces(unittest.TestCase):
                 # This is probably going to get me cancelled
                 self.assertTrue(
                     pygame.math.Vector2(
-                        float(pygame.image.load(image_small).convert().get_width()),
-                        float(pygame.image.load(image_small).convert().get_height()),
+                        float(pygame.image.load(
+                            image_small).convert().get_width()),
+                        float(pygame.image.load(
+                            image_small).convert().get_height()),
                     ).magnitude()
                     < pygame.math.Vector2(
-                        float(pygame.image.load(image_large).convert().get_width()),
-                        float(pygame.image.load(image_large).convert().get_height()),
+                        float(pygame.image.load(
+                            image_large).convert().get_width()),
+                        float(pygame.image.load(
+                            image_large).convert().get_height()),
                     ).magnitude()
                 )
             except Exception:

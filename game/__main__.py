@@ -1,3 +1,10 @@
+<<<<<<< Updated upstream
+=======
+from zoom import ZoomScreen
+from splash import SplashScreen
+import menu as menu_
+import game as game_
+>>>>>>> Stashed changes
 import os
 import sys
 
@@ -12,10 +19,6 @@ window = pygame.display.set_mode((screen_size.width, screen_size.height))
 
 
 # imports must be like this due to pygame init requirements
-import game as game_
-import menu as menu_
-from splash import SplashScreen
-from zoom import ZoomScreen
 
 
 SPLASH_SCREEN = -1

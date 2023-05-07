@@ -1,4 +1,3 @@
-from .player import Player
 import os
 import sys
 
