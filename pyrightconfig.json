@@ -1,0 +1,9 @@
+{
+    "include": [
+	    "game/**/*",
+	    "entities/*",
+	    "utils/*",
+	    "ui/*"],
+    "typeCheckingMode": "basic",
+    "reportMissingImports": true
+}

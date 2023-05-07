@@ -1,3 +1,17 @@
+"""
+This module houses the SplashScreen class which fades in and out text.
+
+module: game.splash
+   ⚪ draw
+     ↪️ Draw splash screen surface to primary display surface
+   ⚪ update
+     ↪️ Updates user events such as quit and listens for space bar presses
+
+license: MIT
+author: Joshua Rose
+date: 07/05/2023
+"""
+
 import json
 import os
 import sys
@@ -6,6 +20,10 @@ import pygame
 
 
 class SplashScreen:
+    """
+    Fades in and out text
+    """
+
     datafile = open("data/theme.json", "r")
     transition = json.load(datafile)["SplashScreen"]["default"]
     datafile.close()
@@ -52,6 +70,9 @@ class SplashScreen:
 
     @classmethod
     def update(cls):
+        """
+        Updates user events such as quit and listens for space bar presses.
+        """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -92,7 +113,7 @@ class SplashScreen:
 
     @classmethod
     def draw(cls):
-        """Draw to screen as declared in class var"""
+        """Draw splash screen surface to primary display surface."""
 
         cls.surface.fill(cls.background_color)
         cls.surface.blit(cls.label_surf, cls.label_rect)

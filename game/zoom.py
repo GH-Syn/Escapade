@@ -1,3 +1,17 @@
+"""
+This module houses the ZoomScreen class which zooms into the main menu
+
+module: game.zoom
+   ⚪ draw
+     ↪️ Draw  screen surface to primary display surface
+   ⚪ update
+     ↪️ Updates user events such as quit and button presses
+
+license: MIT
+author: Joshua Rose
+date: 07/05/2023
+"""
+
 import json
 import sys
 
@@ -5,6 +19,10 @@ import pygame
 
 
 class ZoomScreen:
+    """
+    Zooms into main menu when play button is pressed.
+    """
+
     datafile = open("data/theme.json", "r")
     transition = json.load(datafile)["SplashScreen"]["default"]
     datafile.close()
@@ -45,6 +63,10 @@ class ZoomScreen:
 
     @classmethod
     def update(cls):
+        """
+        Updates user events such as button presses and quit events
+        """
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
