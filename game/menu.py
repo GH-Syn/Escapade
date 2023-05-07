@@ -1,3 +1,21 @@
+"""
+This module houses the main menu class which handles menu events and animations.
+
+module: game.menu
+   ⚪ play_open_animation
+     ↪️ Plays animation where sign drops down and shows buttons for main menu
+   ⚪ load_menu_sprites_from_path
+     ↪️ Recursively iterate through path and return a list of menu sprites
+   ⚪ sort_menu_sprites_by_pattern
+     ↪️ Fetch menu sprites that match a given pattern
+   ⚪ update_event_loop
+     ↪️ Updates user events such as quit and mousemotion etc
+
+license: MIT
+author: Joshua Rose
+date: 07/05/2023
+"""
+
 import os
 import re
 import sys
@@ -8,6 +26,8 @@ from tqdm import tqdm
 
 
 class Menu:
+    """ Handles menu events and animations """
+
     pygame.display.init()
     window = pygame.display.get_surface() if pygame.display.get_surface() else None
     pygame.font.init()
@@ -47,7 +67,9 @@ class Menu:
 
     @classmethod
     def play_open_animation(cls):
-        """Play main menu animation"""
+        """
+        Plays main menu animation.
+        """
         if not cls.opening:
             return
         if cls.opening_frame < len(cls.menu_sprites):
@@ -62,7 +84,9 @@ class Menu:
 
     @classmethod
     def load_menu_sprites_from_path(cls, path="res/menu"):
-        """Recursively iterate through path and return a list of menu sprites"""
+        """
+        Recursively iterate through path and return a list of menu sprites.
+        """
 
         with tqdm(
             total=len(os.listdir(path)),
@@ -88,6 +112,9 @@ class Menu:
 
     @classmethod
     def sort_menu_sprites_by_pattern(cls):
+        """
+        Fetch menu sprites that match a given pattern.
+        """
         for filename in sorted(os.listdir(cls.path)):
             if cls.pattern.match(filename):
                 cls.menu_sprites.append(
@@ -96,13 +123,17 @@ class Menu:
 
     @classmethod
     def draw_to_window(cls):
-        """Draw menu to window"""
+        """
+        Draw menu to window.
+        """
         cls.play_open_animation()
         cls.window.blit(cls.image, (0, 0))
 
     @classmethod
     def update_event_loop(cls):
-        """Wait for user input from event loop"""
+        """
+        Wait for user input from event loop.
+        """
         for event in pygame.event.get():
             if event.type == pygame.MOUSEMOTION:
                 cls.mx, cls.my = pygame.mouse.get_pos()
