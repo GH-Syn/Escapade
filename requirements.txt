@@ -1,3 +1,2 @@
 pygame
 pygame_gui
-git+https://github.com/Pebaz/Nimporter

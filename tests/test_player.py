@@ -1,5 +1,7 @@
 import unittest
 
+from pygame import Vector2
+
 import entities.player
 from game.screen_size import height, width
 
