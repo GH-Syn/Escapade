@@ -127,20 +127,13 @@ class Menu:
             dynamic_ncols=True,
             desc=" 👀 Looking for files",
         ) as pbar:
-            for j in os.listdir("res/menu"):
+            for j in sorted(os.listdir("res/menu")):
                 try:
-                    if j.endswith(".png"):
-                        if j not in [
-                            "old",
-                            "background",
-                            "menu.png",
-                            "sign",
-                            "sign_scaled.png",
-                        ]:
-                            image = pygame.image.load(
-                                os.path.join("res", "menu", j)
-                            ).convert_alpha()
-                            cls.menu_sprites.append(image)
+                    if cls.pattern.match(j):
+                        image = pygame.image.load(
+                            os.path.join("res", "menu", j)
+                        ).convert_alpha()
+                        cls.menu_sprites.append(image)
                 finally:
                     pbar.update(1)
 
