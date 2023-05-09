@@ -15,7 +15,7 @@ class Menu:
 
     window = (
         pygame.display.get_surface() if pygame.display.get_surface() else None
-    )  # pyright: ignore
+    )
     window: pygame.SurfaceType = window
     font = os.path.join("res/fonts/Silkscreen", "slkscr.ttf")
 

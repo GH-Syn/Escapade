@@ -125,7 +125,7 @@ class Entity(object):
         :param `sequence`: The sequence of images to set the animation to as a list of surfaces
         """
 
-        self.animation = sequence  # pyright: ignore
+        self.animation = sequence
         self.animation_frame = 0
 
     def set_action(self, action_id, force=False):
@@ -224,16 +224,14 @@ class Entity(object):
         if self.animation != None:
             while self.animation_frame < 0:
                 if "loop" in self.animation_tags:
-                    self.animation_frame += len(self.animation)  # pyright: ignore
+                    self.animation_frame += len(self.animation)
                 else:
                     self.animation = 0
-            # pyright: ignore
-            while self.animation_frame >= len(self.animation):  # pyright: ignore
+            while self.animation_frame >= len(self.animation):
                 if "loop" in self.animation_tags:
-                    # pyright: ignore
-                    self.animation_frame -= len(self.animation)  # pyright: ignore
+                    self.animation_frame -= len(self.animation)
                 else:
-                    self.animation_frame = len(self.animation) - 1  # pyright: ignore
+                    self.animation_frame = len(self.animation) - 1
 
     def get_current_img(self):
         if self.animation == None:
@@ -244,9 +242,9 @@ class Entity(object):
         else:
             return game.engine.flip(
                 Entity.animation_database[
-                    self.animation[self.animation_frame]  # pyright: ignore
-                ],  # pyright: ignore
-                self.flip,  # pyright: ignore
+                    self.animation[self.animation_frame]
+                ],
+                self.flip,
             )
 
     def get_drawn_img(self):
@@ -258,9 +256,9 @@ class Entity(object):
         else:
             image_to_render = game.engine.flip(
                 Entity.animation_database[
-                    self.animation[self.animation_frame]  # pyright: ignore
-                ],  # pyright: ignore
-                self.flip,  # pyright: ignore
+                    self.animation[self.animation_frame]
+                ],
+                self.flip,
             ).copy()
         if image_to_render != None:
             center_x = image_to_render.get_width() / 2
@@ -278,9 +276,9 @@ class Entity(object):
         else:
             image_to_render = game.engine.flip(
                 Entity.animation_database[
-                    self.animation[self.animation_frame]  # pyright: ignore
-                ],  # pyright: ignore
-                self.flip,  # pyright: ignore
+                    self.animation[self.animation_frame]
+                ],
+                self.flip,
             ).copy()
         if image_to_render != None:
             center_x = image_to_render.get_width() / 2

@@ -25,7 +25,7 @@ GAME = 2
 
 game_state = SPLASH_SCREEN
 
-game = game_.Game()  # pyright: ignore
+game = game_.Game()
 menu = menu_.Menu()
 splash = SplashScreen()
 zoom = ZoomScreen()
