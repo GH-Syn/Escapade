@@ -71,10 +71,10 @@ def blit_center(surf: pygame.SurfaceType, surf2: pygame.SurfaceType, pos):
 
 # animation stuff
 
-global animation_database  # pyright: ignore
+global animation_database
 animation_database = {}
 
-global animation_higher_database  # pyright: ignore
+global animation_higher_database
 animation_higher_database = {}
 
 Entity.animation_database = animation_database
