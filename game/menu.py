@@ -46,6 +46,7 @@ class Menu:
                     pbar.update(1)
 
     paths: list[str] = paths
+
     if isinstance(pygame.display.get_surface(), pygame.SurfaceType):
         with tqdm(
             total=len(paths),
@@ -108,8 +109,12 @@ class Menu:
             return
 
     @classmethod
-    def draw(cls):
-        cls.play_open_animation()
+    def set_window(cls) -> None:
+        """Set the window from None to surface"""
+        if pygame.display.get_surface():
+            cls.window = pygame.display.get_surface()
+            return True
+        return False
 
     @classmethod
     def load_menu_sprites_from_path(cls, path="res/menu"):
