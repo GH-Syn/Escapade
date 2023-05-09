@@ -2,11 +2,11 @@
 
 import os
 import sys
+
+sys.path.insert(0, os.getcwd())
 import unittest
 
 import pygame
-
-sys.path.insert(0, os.getcwd())
 
 
 class TestSurfaces(unittest.TestCase):
@@ -76,7 +76,10 @@ class TestSurfaces(unittest.TestCase):
 
         for font in self.fonts:
             font_face = os.path.join(
-                "./res", "fonts", font, os.listdir(os.path.join("./res", "fonts", font))[0]
+                "./res",
+                "fonts",
+                font,
+                os.listdir(os.path.join("./res", "fonts", font))[0],
             )
 
             self.assertIn(font, fonts)

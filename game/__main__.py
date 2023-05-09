@@ -1,3 +1,5 @@
+import menu as menu_
+import game as game_
 import os
 import sys
 
@@ -7,16 +9,14 @@ import pygame
 
 sys.path.insert(0, os.getcwd())
 
+
 pygame.display.init()
 window = pygame.display.set_mode((screen_size.width, screen_size.height))
 
-
 # imports must be like this due to pygame init requirements
-import game as game_
-import menu as menu_
-from splash import SplashScreen
-from zoom import ZoomScreen
 
+from zoom import ZoomScreen
+from splash import SplashScreen
 
 SPLASH_SCREEN = -1
 MENU = 0
@@ -25,26 +25,41 @@ GAME = 2
 
 game_state = SPLASH_SCREEN
 
-game = game_.Game()  # pyright: ignore
+game = game_.Game()
 menu = menu_.Menu()
 splash = SplashScreen()
 zoom = ZoomScreen()
 
-while True:
-    match game_state:
-        case -1:
-            if not splash.update():
-                game_state = 0
-            splash.draw()
-        case 0:
-            menu.open()
-            if not menu.update():
-                game_state = 1
-            menu.draw()
-        case 1:
-            if not zoom.update():
-                game_state = 2
-            zoom.draw()
-        case 2:
-            game.update()
-            game.draw()
+# load sprites
+menu.load_menu_sprites_from_path(path="res/menu")
+menu.set_window()
+
+def main():
+    global game_state
+
+    print("entry -> splash")
+
+    while True:
+        match game_state:
+            case -1:
+                if not splash.update():
+                    print("splash -> menu")
+                    game_state = 0
+                splash.draw()
+            case 0:
+                if not menu.update():
+                    print("menu -> zoom")
+                    game_state = 1
+                menu.draw_to_window()
+            case 1:
+                if not zoom.update():
+                    print("zoom -> game")
+                    game_state = 2
+                zoom.draw()
+            case 2:
+                game.update()
+                game.draw()
+
+
+if __name__ == "__main__":
+    main()

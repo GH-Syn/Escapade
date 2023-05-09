@@ -72,8 +72,8 @@ class ItemContainer(pygame.sprite.Sprite):
         # Create the inventory items and add them to the group
         for i in range(num_items):
             item = cls()
-            item.rect.x = start_x + i * (item_width + padding)  # pyright: ignore
-            item.rect.y = (screen_height - item_height) // 2  # pyright: ignore
+            item.rect.x = start_x + i * (item_width + padding)
+            item.rect.y = (screen_height - item_height) // 2
             inventory_group.add(item)
 
         return inventory_group
