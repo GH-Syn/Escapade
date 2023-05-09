@@ -72,6 +72,7 @@ class ZoomScreen:
                 pygame.quit()
                 sys.exit(0)
 
+        print(cls.scale)
         if cls.scale < cls.final_scale_factor:
             if cls.scale > 4:
                 if cls.alpha > 0:
