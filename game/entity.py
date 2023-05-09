@@ -241,9 +241,7 @@ class Entity(object):
                 return None
         else:
             return game.engine.flip(
-                Entity.animation_database[
-                    self.animation[self.animation_frame]
-                ],
+                Entity.animation_database[self.animation[self.animation_frame]],
                 self.flip,
             )
 
@@ -255,9 +253,7 @@ class Entity(object):
                 image_to_render = game.engine.flip(self.image, self.flip).copy()
         else:
             image_to_render = game.engine.flip(
-                Entity.animation_database[
-                    self.animation[self.animation_frame]
-                ],
+                Entity.animation_database[self.animation[self.animation_frame]],
                 self.flip,
             ).copy()
         if image_to_render != None:
@@ -275,9 +271,7 @@ class Entity(object):
                 image_to_render = game.engine.flip(self.image, self.flip).copy()
         else:
             image_to_render = game.engine.flip(
-                Entity.animation_database[
-                    self.animation[self.animation_frame]
-                ],
+                Entity.animation_database[self.animation[self.animation_frame]],
                 self.flip,
             ).copy()
         if image_to_render != None:

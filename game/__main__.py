@@ -25,14 +25,10 @@ GAME = 2
 
 game_state = SPLASH_SCREEN
 
-game = game_.Game()
-menu = menu_.Menu()
-splash = SplashScreen()
-zoom = ZoomScreen()
-
 # load sprites
-menu.load_menu_sprites_from_path(path="res/menu")
-menu.set_window()
+menu_.Menu.load_menu_sprites_from_path(path="res/menu")
+menu_.Menu.set_window()
+
 
 def main():
     global game_state
@@ -42,23 +38,23 @@ def main():
     while True:
         match game_state:
             case -1:
-                if not splash.update():
+                if not SplashScreen.update():
                     print("splash -> menu")
                     game_state = 0
-                splash.draw()
+                SplashScreen.draw()
             case 0:
-                if not menu.update():
+                if not menu_.Menu.update():
                     print("menu -> zoom")
                     game_state = 1
-                menu.draw_to_window()
+                menu_.Menu.draw_to_window()
             case 1:
-                if not zoom.update():
+                if not ZoomScreen.update():
                     print("zoom -> game")
                     game_state = 2
-                zoom.draw()
+                ZoomScreen.draw()
             case 2:
-                game.update()
-                game.draw()
+                Game.update()
+                Game.draw()
 
 
 if __name__ == "__main__":
