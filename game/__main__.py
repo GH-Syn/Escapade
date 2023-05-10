@@ -1,10 +1,10 @@
 import os
 import sys
 
+from game import Game
 sys.path.insert(0, os.getcwd())
 
 import menu as menu_
-import game as game_
 
 import screen_size
 import pygame
@@ -49,6 +49,7 @@ def main():
             case 1:
                 if not ZoomScreen.update():
                     print("zoom -> game")
+                    Game.window = pygame.display.get_surface()
                     game_state = 2
                 ZoomScreen.draw()
             case 2:
