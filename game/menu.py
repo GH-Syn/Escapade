@@ -152,9 +152,12 @@ class Menu:
     def update(cls):
         # if user presses buttons
         for event in pygame.event.get():
-            if event.type == pygame.MOUSEMOTION:
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit(0)
+            elif event.type == pygame.MOUSEMOTION:
                 cls.mx, cls.my = pygame.mouse.get_pos()
-            if event.type == pygame.MOUSEBUTTONDOWN:
+            elif event.type == pygame.MOUSEBUTTONDOWN:
                 if pygame.Rect.collidepoint(cls.play_button_rect, (cls.mx, cls.my)):
                     print("play button pressed")
                     return False

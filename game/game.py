@@ -13,7 +13,9 @@ date: 07/05/2023
 """
 
 
+import sys
 import pygame
+
 
 class Game:
     """
@@ -38,5 +40,9 @@ class Game:
         """
         Regulate time elapsed since last frame and update frames.
         """
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit(0)
         Game.dt = Game.clock.tick(30) / 1000.0
         pygame.display.update()
