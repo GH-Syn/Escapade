@@ -23,8 +23,8 @@ jobs:
       - uses: release-drafter/release-drafter@v5
         # (Optional) specify config path to use, relative to the repository root. Default: .github/release-drafter.yml
         with:
-          config-name: prerelease-notes-pretty.yml
-          config-path: .github/prelease-notes-pretty.yml
+          config-name: release-notes-pretty.yml
+          config-path: .github/release-notes-pretty.yml
           disable-autolabeler: false
           permissions: write
         env:
