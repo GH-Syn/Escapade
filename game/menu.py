@@ -20,7 +20,6 @@ class Menu:
     DEFAULT_MENU_BACKGROUND_COLOR = (25, 25, 25)
 
     clock = pygame.time.Clock()
-    dt = 0
     fps = 24
 
     menu_sprites: list[pygame.SurfaceType] = []
@@ -67,13 +66,6 @@ class Menu:
     menu_sprites.clear()
     menu_sprites = []
 
-    if isinstance(pygame.display.get_surface(), pygame.SurfaceType):
-        for filename in sorted(os.listdir(path)):
-            if pattern.match(filename):
-                menu_sprites.append(
-                    pygame.image.load(os.path.join(path, filename)).convert_alpha()
-                )
-
     opening = True
     opening_frame = 0
     opening_tick = 0
@@ -82,12 +74,6 @@ class Menu:
     image = pygame.Surface((0, 0))
     play_button_rect = pygame.Rect(0, 0, 0, 0)
     quit_button_rect = pygame.Rect(0, 0, 0, 0)
-
-    if isinstance(pygame.display.get_surface(), pygame.SurfaceType):
-        image: pygame.Surface = menu_sprites[0]
-        mask = pygame.Surface(window.get_size(), SRCALPHA)
-        play_button_rect = pygame.Rect(700, 180, 105, 40)
-        quit_button_rect = pygame.Rect(700, 245, 105, 40)
 
     mx, my = pygame.mouse.get_pos()
 
@@ -110,7 +96,15 @@ class Menu:
     def set_window(cls) -> None:
         """Set the window from None to surface"""
         if pygame.display.get_surface():
+
+            print("setting window")
             cls.window = pygame.display.get_surface()
+
+            if isinstance(pygame.display.get_surface(), pygame.SurfaceType):
+                image: pygame.Surface = cls.menu_sprites[0]
+                mask = pygame.Surface(cls.window.get_size(), SRCALPHA)
+                cls.play_button_rect = pygame.Rect(700, 180, 105, 40)
+                cls.quit_button_rect = pygame.Rect(700, 245, 105, 40)
             return True
         return False
 
@@ -162,11 +156,13 @@ class Menu:
                 cls.mx, cls.my = pygame.mouse.get_pos()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if pygame.Rect.collidepoint(cls.play_button_rect, (cls.mx, cls.my)):
+                    print("play button pressed")
                     return False
                 elif pygame.Rect.collidepoint(cls.quit_button_rect, (cls.mx, cls.my)):
+                    print("quit button pressed")
                     pygame.quit()
                     sys.exit(0)
 
-        cls.dt = cls.clock.tick(cls.fps) / 1000.0
+        cls.clock.tick(cls.fps) / 1000.0
         pygame.display.update()
         return True
