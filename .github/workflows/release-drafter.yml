@@ -2,8 +2,7 @@ name: Release Drafter
 
 on:
   push:
-    branches:
-      main
+    branches: [main]
   pull_request:
     # Only following types are handled by the action, but one can default to all as well
     types: [opened, reopened, synchronize]
@@ -13,12 +12,6 @@ on:
 
 jobs:
   update_release_draft:
-    permissions:
-      # write permission is required to create a github release
-      contents: write
-      # write permission is required for autolabeler
-      # otherwise, read permission is required at least
-      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       # (Optional) GitHub Enterprise requires GHE_HOST variable set
@@ -28,10 +21,10 @@ jobs:
 
       # Drafts your next Release notes as Pull Requests are merged into "master"
       - uses: release-drafter/release-drafter@v5
-        # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
+        # (Optional) specify config path to use, relative to the repository root. Default: .github/release-drafter.yml
         with:
-          config-name: prelease-notes-pretty.yml
+          config-path: prelease-notes-pretty.yml
           disable-autolabeler: false
+          permissions: write
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
-
