@@ -1,19 +1,18 @@
-import menu as menu_
-import game as game_
 import os
 import sys
+
+sys.path.insert(0, os.getcwd())
+
+import menu as menu_
+import game as game_
 
 import screen_size
 import pygame
 
-
-sys.path.insert(0, os.getcwd())
-
-
 pygame.display.init()
 window = pygame.display.set_mode((screen_size.width, screen_size.height))
 
-# imports must be like this due to pygame init requirements
+# NOTE imports must be like this due to pygame init requirements
 
 from zoom import ZoomScreen
 from splash import SplashScreen
