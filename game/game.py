@@ -15,7 +15,6 @@ date: 07/05/2023
 
 import pygame
 
-
 class Game:
     """
     Responsible for running game loop.
