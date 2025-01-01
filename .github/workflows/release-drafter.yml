@@ -26,4 +26,4 @@ jobs:
           disable-autolabeler: false
           permissions: write
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
