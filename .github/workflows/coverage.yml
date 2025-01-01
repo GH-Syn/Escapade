@@ -1,27 +1,26 @@
-name: Coverage
+name: Codecov
 
-on:
-  workflow_call:
-    secrets:
-      codecov_token:
-        required: true
-  workflow_dispatch:
+on: [push, pull_request]
 
 jobs:
-  coverage:
+  run:
     runs-on: ubuntu-24.04
+    permissions:
+      id-token: write
     steps:
-      - uses: actions/checkout@v2
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4
         with:
-          flags: unittests
-          token: ${{ secrets.CODECOV_TOKEN }}
-	  verbose: true
-
-      - name: Upload test results to Codecov
-        if: ${{ !cancelled() }}
-        uses: codecov/test-results-action@v1
+          python-version: '3.10'
+      - name: Install dependencies
+        run: pip install -r requirements.txt; pip install -r requirements-dev.txt
+      - name: Run tests and collect coverage
+        run: pytest --cov app
+      - name: Upload coverage to Codecov (arg token)
+        uses: codecov/codecov-action@main
         with:
+          fail_ci_if_error: true
           token: ${{ secrets.CODECOV_TOKEN }}
-	  verbose: true
+          verbose: true
