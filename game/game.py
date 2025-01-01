@@ -12,9 +12,9 @@ author: Joshua Rose
 date: 07/05/2023
 """
 
-
 import sys
 import pygame
+
 
 class Game:
     """

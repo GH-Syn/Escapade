@@ -2,6 +2,7 @@ import os
 import sys
 
 from game import Game
+
 sys.path.insert(0, os.getcwd())
 
 import menu as menu_

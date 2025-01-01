@@ -17,3 +17,5 @@ sphinx
 sphinx-tabs
 sphinx-material
 sphinxawesome-theme
+
+tqdm
