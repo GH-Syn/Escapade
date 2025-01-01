@@ -11,7 +11,7 @@ jobs:
         uses: codecov/codecov-action@v2.1.0
         with:
           flags: unittests
-          env: "add4c20f-d619-41cb-9044-b275f22ea7eb"
+          token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Upload test results to Codecov
         if: ${{ !cancelled() }}
