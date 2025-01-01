@@ -10,6 +10,10 @@
 <img src="https://raw.githubusercontent.com/GH-Syn/Escapade/main/res/menu/readme_about.png"></img>
 -->
 
+
+[![codecov](https://codecov.io/gh/H4ppy-04/Escapade/graph/badge.svg?token=z3u2IlWLIV)](https://codecov.io/gh/H4ppy-04/Escapade)
+
+
 ## About
 
 Escapade is a puzzle adventure game where the player must plot their escape from a series of increasingly challenging environments. Use your wits and problem-solving skills to find clues, unlock hidden passages, and outsmart your captors.
