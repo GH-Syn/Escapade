@@ -7,8 +7,6 @@ on:
         required: true
   workflow_dispatch:
 
-on: [push, pull_request]
-
 jobs:
   coverage:
     runs-on: ubuntu-24.04
