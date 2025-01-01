@@ -12,3 +12,9 @@ jobs:
         with:
           flags: unittests
           env: "add4c20f-d619-41cb-9044-b275f22ea7eb"
+
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
