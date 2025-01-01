@@ -19,7 +19,7 @@ jobs:
       - name: Run tests and collect coverage
         run: pytest --cov app
       - name: Upload coverage to Codecov (arg token)
-        uses: codecov/codecov-action@5.0.7
+        uses: codecov/codecov-action@v5.0.7
         with:
           fail_ci_if_error: true
           token: ${{ secrets.CODECOV_TOKEN }}
